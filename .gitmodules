@@ -1,0 +1,3 @@
+[submodule "flutterflip"]
+	path = flutterflip
+	url = git@github.com:RedBrogdon/flutterflip
