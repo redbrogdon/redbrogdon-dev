@@ -19,7 +19,8 @@ jobs:
       - name: Check submodule
         run: ls -la flutterflip
       - name: Build site
-        run: cd flutterflip && flutter build web --base-href="/flutterflip" && cd ..
+        working-directory: ./flutterflip
+        run: flutter build web --base-href="/flutterflip/"
       - name: Copy build/web into public
         run: cp -r flutterflip/build/web public/flutterflip
       - name: Deploy to FB Hosting
