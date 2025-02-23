@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
-      - name: Clone flutterflip submodule
-        run: git submodule update
       - name: Check submodule
         run: ls -la flutterflip
       - name: Build site
