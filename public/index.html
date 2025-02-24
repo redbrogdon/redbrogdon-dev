@@ -2,7 +2,11 @@
 <html>
 
 <head>
-  <link href="https://cdn.simplecss.org/simple.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>redbrogdon.dev</title>
+  <link href="static/css/simple.css" rel="stylesheet">
   <link href="static/css/fontawesome.css" rel="stylesheet" />
   <link href="static/css/brands.css" rel="stylesheet" />
   <style>
@@ -25,75 +29,84 @@
       width: 100%;
       aspect-ratio: 1 / 1;
     }
+
+    #sheldon {
+      margin-top: 60px;
+    }
   </style>
 </head>
 
 <body>
   <header>
     <nav>
-      <a href="/" class="current">Home</a>
       <a href="https://linkedin.com/in/andrewbrogdon"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-      <a href="https://bsky.app/profile/redbrogdon.bsky.social"><i class="fa-brands fa-bluesky"></i> Bluesky</a>
+      <a href="https://bsky.app/profile/redbrogdon.bsky.social"><i class="fa-brands fa-bluesky"></i>
+        Bluesky</a>
       <a href="/">Résumé</a>
       <a href="https://github.com/redbrogdon"><i class="fa-brands fa-github"></i> GitHub</a>
     </nav>
   </header>
   <main>
-
     <section>
       <h2>Hello.</h2>
       <aside>
         <img src="static/images/headshot.png" />
       </aside>
       <p>
-        This is the personal site for Andrew Brogdon. I'm a software engineer employed
-        by Google, where I lead the developer relations team for <a href="https://dart.dev">Dart</a>
+        This is the personal site of Andrew Brogdon. I'm a software engineer working
+        at Google, where I lead the developer relations team for <a href="https://dart.dev">Dart</a>
         and <a href="https://flutter.dev">Flutter</a>, a motley assortment of engineers,
-        tech writers, and program managers that I'm lucky to work with.
+        tech writers, and program managers whom I'm lucky to work with.
       </p>
       <p>
-        Mostly this site is intended as a place to keep links to things I've worked on.
+        If you arrived here, you probably bumped into me at a conference or saw a video/blog/project
+        that I worked on. Welcome!
       </p>
-    </section>
+      <h4>A few, mostly random, things about me.</h4>
+      <ul>
+        <li>At university I studied to be a poet, and you can still find one or two of my poems online.</li>
+        <li>
+          I once <a href="https://www.youtube.com/watch?v=mFWplUx3oZ0">co-hosted a tech
+            livestream with Rivers Cuomo</a>, lead singer/songwriter for the band Weezer.
+        </li>
+        <li>My most prized possession is an original Bloom County comic strip.</li>
+        <li>Work has taken me to 20 Google offices, 7 countries, and 4 continents.</li>
+      </ul>
 
-    <section>
-      <h2>I met Rivers Cuomo once.</h2>
-      <p>
-        Rivers Cuomo, the lead singer/songwriter for the band Weezer, is also a legit app developer.
-        Seriously, check his <a href="https://github.com/riverscuomo">GitHub profile</a>.
-        He agreed to be a part of our livestream at the end of 2024 and not only brought some
-        really good questions but was exactly as nice in real life as you'd hope.
-      </p>
-      <p>
-        At the end of the shoot, a security guard who'd previously been working in the studio
-        suddenly reappeared with a guitar case and an armful of LPs. He told Rivers that his son
-        was the biggest Weezer fan in the world and asked if he'd sign something. Rivers took
-        a good five minutes to autograph every record and drew a Weezer logo onto the guitar.
-      </p>
-      <p>
-        He also did a great job trying to make the jokes I'd written for us land well, which is
-        90% of what I look for in a co-presenter. 😂
-      </p>
-      <figure><iframe width="560" height="315" src="https://www.youtube.com/embed/mFWplUx3oZ0?si=g3RC_wvId7icN-J1"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></figure>
-    </section>
+      <figure id="sheldon">
+        <img src="static/images/sheldon.png" />
+        <figcaption>
+          I created this little guy using <a href="https://labs.google/fx/tools/image-fx">ImageFX</a>
+          for a keynote on Flutter and Generative AI. Gemini named him "Saucy Sheldon." 😀
+        </figcaption>
+      </figure>
 
-    <section>
-      <h2>Reversi.</h2>
+      <h4>Working with Andrew.</h4>
       <p>
-        When I need to learn a new UI framework, I use it to write a Reversi game. Back in 2018
-        I joined the Flutter team, and the first thing I did was write this version.
+        I use LinkedIn and Bluesky (see links in the header) to connect with folks in the
+        engineering community, particularly about Dart/Flutter and projects in the ecosystem.
+        For whatever reason, giving out my email feels like telling someone my home address, so
+        I tend to rely more on social media. Feel free to connect, though, especially if you want
+        to share something you're proud of. I love raising awareness of other people's projects!
       </p>
       <p>
-        (I then rewrote it, like, four times as I worked through being a newb and learned how
-        streaming data, reactive UI, and a lot of other Flutter fundamentals work!)
+        I'm currently based in Sunnyvale, California, but would love to move back to the
+        jewel of the midwest, Columbus, Ohio. Flutter is global community, though, and I
+        enjoy meeting folks from all over and trying their snacks.
+      </p>
+      <p>
+        My way of learning a new language and/or UI framework is to code Reversi in it. Back
+        in 2018 when I joined Flutter, I wrote this version (which is slightly janky due to
+        the way isolates work on the web):
       </p>
       <iframe src="flutterflip/index.html" id="flutter-host"></iframe>
       </div>
     </section>
   </main>
+
+  <footer>
+    <p>This site is built with <a href="https://simplecss.org">Simple.css</a> nad Firebase Hosting.</p>
+  </footer>
 </body>
 
 </html>
