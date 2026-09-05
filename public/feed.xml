@@ -16,14 +16,6 @@
   </item>
 
   <item>
-    <title>Flutter’s multiplatform value for agentic development</title>
-    <link>https://redbrogdon.dev/writing/multiplatform-agents.html</link>
-    <guid>https://redbrogdon.dev/writing/multiplatform-agents.html</guid>
-    <pubDate>Mon, 18 May 2026 00:00:00 GMT</pubDate>
-    <description>Why Flutter's unified codebase architecture significantly reduces token overhead, state fragmentation, and context switching when orchestrating agent workflows.</description>
-  </item>
-
-  <item>
     <title>Learning faster with Antigravity</title>
     <link>https://redbrogdon.dev/writing/learning-with-antigravity.html</link>
     <guid>https://redbrogdon.dev/writing/learning-with-antigravity.html</guid>
@@ -37,14 +29,6 @@
     <guid>https://redbrogdon.dev/writing/genui-updates.html</guid>
     <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
     <description>Architectural changes to the genui package, detailing how the A2UI protocol connects autonomous agents with client-side widget catalogs.</description>
-  </item>
-
-  <item>
-    <title>Harness the Gemini API in your Dart and Flutter Apps</title>
-    <link>https://redbrogdon.dev/writing/gemini-api.html</link>
-    <guid>https://redbrogdon.dev/writing/gemini-api.html</guid>
-    <pubDate>Thu, 15 Feb 2024 00:00:00 GMT</pubDate>
-    <description>A hands-on guide to integrating multimodal generative AI models into client applications with the Dart Gemini SDK.</description>
   </item>
 
   <item>
