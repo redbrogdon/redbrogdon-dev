@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speeding up generative UI with async A2UI · Andrew Brogdon</title>
+  <meta name="description" content="Techniques to pre-generate, stream, and cache A2UI messages to eliminate startup latency and improve UI responsiveness in agentic applications.">
+  <link rel="canonical" href="https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui" />
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/favicon-180x180.png" type="image/png" />
+  <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/css/brands.css">
+</head>
+
+<body>
+  <div class="broadside-layout">
+    
+    <aside class="sidebar">
+      <img src="/static/images/headshot.png" alt="Headshot of Andrew Brogdon" class="avatar" />
+      <h1 class="site-title"><a href="/">Andrew Brogdon</a></h1>
+      <p class="site-tagline">Staff DevRel Engineer & Tech Lead at Google</p>
+
+      <nav class="sidebar-nav">
+        <a href="/writing/">← Back to Writing</a>
+        <a href="/">Home</a>
+        <a href="/poetry/">Poetry Collection</a>
+      </nav>
+
+      <div class="sidebar-social">
+        <a href="https://github.com/redbrogdon" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+        <a href="https://bsky.app/profile/redbrogdon.dev" target="_blank" rel="noopener">
+          <i class="fa-brands fa-bluesky"></i> Bluesky
+        </a>
+        <a href="https://linkedin.com/in/redbrogdon" target="_blank" rel="noopener">
+          <i class="fa-brands fa-linkedin"></i> LinkedIn
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <article>
+        <header class="article-header">
+          <h1 class="article-title">Speeding up generative UI with async A2UI</h1>
+          <div class="article-meta">
+            <span>August 13, 2026</span>
+            <span class="dot">·</span>
+            <span>7 min read</span>
+            <span class="dot">·</span>
+            <span>Generative UI, A2UI, Flutter</span>
+          </div>
+        </header>
+
+        <div class="canonical-box">
+          Originally published on <a href="https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui" target="_blank" rel="noopener">The Flutter Blog on Medium ↗</a>.
+        </div>
+
+        <div class="article-body">
+          <p class="lead" style="font-size: 1.28rem;">
+            One of the central promises of Generative UI (GenUI) is that interfaces are no longer statically bound to design-time assumptions. Instead, an autonomous agent can compose layouts dynamically based on runtime context, user intent, and live system state. But this flexibility comes with an unavoidable penalty: <strong>startup latency</strong>.
+          </p>
+
+          <p>
+            When a user launches an application or navigates to a new view, waiting 2 to 4 seconds for an LLM to digest the prompt, invoke tool calls, generate structured JSON, and stream the UI definition can ruin the experience. To build production-grade agentic experiences, we need architectures that eliminate cold-start lag without giving up generative adaptability.
+          </p>
+
+          <h2>The Cold Start Dilemma</h2>
+          <p>
+            In traditional GenUI implementations, the client application sends a request to an agent, and the agent constructs an A2UI message payload. That pipeline involves multiple network hops, prompt processing, model inference, and client-side widget deserialization. If this happens synchronously on the critical path, the user stares at a loading indicator.
+          </p>
+
+          <blockquote>
+            "The best generative interface is the one that's already rendered before the user asks for it."
+          </blockquote>
+
+          <p>
+            To address this, we developed an asynchronous pre-generation and caching pattern within the A2UI framework. Rather than generating interfaces reactively on button taps, the agentic runtime predicts probable workflows and synthesizes candidate A2UI payloads ahead of time.
+          </p>
+
+          <h2>Case Study: The Commis Assistant</h2>
+          <p>
+            We tested this pattern in <strong>Commis</strong>, an intelligent assistant application designed for commercial kitchen environments where chefs need instant hands-free guidance during food prep shifts.
+          </p>
+
+          <p>
+            In Commis, prep lists, recipe alterations, and inventory adjustments require rich UI components: timers, ingredient check-lists, and temperature gauges. By running speculative agent passes during natural pauses in workflow, Commis pre-generates the upcoming step's A2UI layout and stores it in a fast local cache.
+          </p>
+
+          <pre><code>// Example A2UI Async Pre-cache Strategy
+class A2UICacheManager {
+  final Map&lt;String, A2UIMessage&gt; _pregeneratedViews = {};
+
+  Future&lt;void&gt; prefetchProbableNextStep(AgentSession session) async {
+    final nextIntent = await session.predictNextUserIntent();
+    final cachedPayload = await session.agent.generateA2UIPayload(nextIntent);
+    _pregeneratedViews[nextIntent.identifier] = cachedPayload;
+  }
+
+  Widget resolveView(String intentId, WidgetCatalog catalog) {
+    if (_pregeneratedViews.containsKey(intentId)) {
+      // Instant render: zero model latency
+      return catalog.buildFromA2UI(_pregeneratedViews.remove(intentId)!);
+    }
+    // Fallback to streaming live generation
+    return LiveGenUIStreamView(intentId: intentId, catalog: catalog);
+  }
+}</code></pre>
+
+          <h2>Streaming Incremental Updates</h2>
+          <p>
+            Pre-generating UI doesn't mean the interface must remain static once loaded. The core strength of the A2UI protocol is its event-driven patch model. A cached baseline widget tree can mount instantaneously (0ms perceived latency), after which background agent workers stream lightweight delta patches to update live quantities, status indicators, and timers in real-time.
+          </p>
+
+          <h2>Conclusion</h2>
+          <p>
+            Generative UI does not have to mean slow UI. By treating interface generation as an asynchronous, speculatively scheduled process rather than a synchronous blocker, developers can deliver apps that feel as responsive as hand-crafted native interfaces while preserving the adaptive intelligence of agentic systems.
+          </p>
+        </div>
+
+        <footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem;">
+          <a href="/writing/">← Back to Technical Writing Archive</a>
+        </footer>
+      </article>
+
+      <footer class="site-footer">
+        <p>Andrew Brogdon · <a href="/">Home</a> · <a href="/writing/">Writing</a> · <a href="/poetry/">Poetry</a></p>
+        <p><a href="/feed.xml">RSS Feed</a></p>
+      </footer>
+    </main>
+
+  </div>
+</body>
+</html>
