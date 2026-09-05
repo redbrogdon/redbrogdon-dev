@@ -24,6 +24,14 @@
   </item>
 
   <item>
+    <title>Learning faster with Antigravity</title>
+    <link>https://redbrogdon.dev/writing/learning-with-antigravity.html</link>
+    <guid>https://redbrogdon.dev/writing/learning-with-antigravity.html</guid>
+    <pubDate>Wed, 01 Jul 2026 04:08:51 GMT</pubDate>
+    <description>Creating Flutter frontends for ADK agents using a structured, iterative 5-step learning loop with Google Antigravity.</description>
+  </item>
+
+  <item>
     <title>New updates to A2UI and Flutter’s GenUI package</title>
     <link>https://redbrogdon.dev/writing/genui-updates.html</link>
     <guid>https://redbrogdon.dev/writing/genui-updates.html</guid>
