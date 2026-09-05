@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning faster with Antigravity · Andrew Brogdon</title>
+  <meta name="description" content="Creating Flutter frontends for ADK using a structured, iterative workflow with Google Antigravity.">
+  <link rel="canonical" href="https://blog.flutter.dev/learning-faster-with-antigravity-cd735bfe44e7" />
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/favicon-180x180.png" type="image/png" />
+  <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/css/brands.css">
+</head>
+
+<body>
+  <div class="broadside-layout">
+    
+    <aside class="sidebar">
+      <img src="/static/images/headshot.png" alt="Headshot of Andrew Brogdon" class="avatar" />
+      <h1 class="site-title"><a href="/">Andrew Brogdon</a></h1>
+      <p class="site-tagline">Staff DevRel Engineer & Tech Lead at Google</p>
+
+      <nav class="sidebar-nav">
+        <a href="/writing/">← Back to Writing</a>
+        <a href="/">Home</a>
+        <a href="/poetry/">Poetry Collection</a>
+      </nav>
+
+      <div class="sidebar-social">
+        <a href="https://github.com/redbrogdon" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+        <a href="https://bsky.app/profile/redbrogdon.dev" target="_blank" rel="noopener">
+          <i class="fa-brands fa-bluesky"></i> Bluesky
+        </a>
+        <a href="https://linkedin.com/in/redbrogdon" target="_blank" rel="noopener">
+          <i class="fa-brands fa-linkedin"></i> LinkedIn
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <article>
+        <header class="article-header">
+          <h1 class="article-title">Learning faster with Antigravity</h1>
+          <div class="article-meta">
+            <span>July 1, 2026</span>
+            <span class="dot">·</span>
+            <span>8 min read</span>
+            <span class="dot">·</span>
+            <span>Agentic AI, Antigravity, Flutter, ADK</span>
+          </div>
+        </header>
+
+        <div class="canonical-box">
+          Originally published on <a href="https://blog.flutter.dev/learning-faster-with-antigravity-cd735bfe44e7" target="_blank" rel="noopener">The Flutter Blog on Medium ↗</a>.
+        </div>
+
+        <figure>
+          <img src="/static/images/writing/antigravity-hero.png" alt="Dash enjoying Antigravity" />
+          <figcaption>Dash enjoying Antigravity</figcaption>
+        </figure>
+
+        <div class="article-body">
+          <h2>Creating Flutter frontends for ADK</h2>
+          <p class="lead" style="font-size: 1.25rem;">
+            How can I build a Flutter frontend for an agent when that agent is built with an SDK and a language I’ve never used before?
+          </p>
+
+          <p>
+            This was the challenge I faced when approaching a Python-based agent written with Agent Development Kit (ADK). With limited experience in Python and no prior exposure to the ADK framework, building a client that integrates with the backend server presented a significant learning curve. Plus, even if I could get a coding agent to crank out something that worked, finishing the project without understanding the code was also a form of failure.
+          </p>
+
+          <p>
+            After a few false starts, though, I found an answer. Using a structured, iterative workflow with my AI coding partner, Antigravity, I created a reusable developer skill that codified what I learned with each go-round. I started from scratch, generated notes about the code, created multiple apps that connected to the <code>deep_search</code> agent (a multi-agent research coordinator from the official ADK samples repository), and incrementally built up the skill and my own understanding. At times, I was using multiple agents at the same time: an “author” agent to create the skill with me, and a “coder” agent to use that guidance to build frontends.
+          </p>
+
+          <p>
+            What I ended up with was an agent skill called <code>flutter_frontend_for_adk</code>. It includes five reference docs that guide Antigravity through a sequence of phases, each one ending in a deliverable:
+          </p>
+
+          <ul>
+            <li><code>AGENT_INTERFACE_NOTES.md</code> — Notes taken during an analysis of the agent’s source code. What is it meant to accomplish and how is it constructed? What are the interfaces and APIs this agent exposes?</li>
+            <li><code>FRONTEND_USAGE_NOTES.md</code> — The first spec. What should the frontend do and how should users interact with it?</li>
+            <li><code>FRONTEND_ARCHITECTURE_NOTES.md</code> — An architecture plan. What services, classes, state, and models should be created?</li>
+            <li><code>FRONTEND_DESIGN_NOTES.md</code> — A design document for the frontend. What will it look like? What are the colors, fonts, and other details?</li>
+          </ul>
+
+          <figure>
+            <img src="/static/images/writing/antigravity-workflow.png" alt="Screenshot of a generated frontend for the deep_search agent" />
+            <figcaption>Screenshot of a generated frontend for the deep_search agent</figcaption>
+          </figure>
+
+          <h2>Establish the loop</h2>
+          <p>
+            Rather than begin with a request for the agent to blast out an app, I established a kind of “learning loop” with it. First, I asked the coder agent to execute the workflow from my skill, and then I worked with the author agent to manually evaluate the coder’s output, identify gaps in the skill’s instructions, and update the guidelines to improve future runs.
+          </p>
+
+          <figure>
+            <img src="/static/images/writing/antigravity-terminal.png" alt="Behold my loop!" />
+            <figcaption>The five-step learning loop</figcaption>
+          </figure>
+
+          <p>The loop consists of five distinct steps driven by conversations with Antigravity:</p>
+          <ol>
+            <li><strong>Execute the current skill:</strong> In a fresh conversation, the coder agent runs the workflow defined by the current skill file.</li>
+            <li><strong>Evaluate output and specifications:</strong> The author agent and I inspect the generated deliverables. I was better at noticing structural issues, while Antigravity caught all the little stuff.</li>
+            <li><strong>Identify gaps and failure modes:</strong> We identify areas where the coder agent lacked guidance or made incorrect assumptions.</li>
+            <li><strong>Update central skill and references:</strong> We update the instructions in <code>SKILL.md</code> or reference guides.</li>
+            <li><strong>Clear local files and rerun:</strong> Delete temporary specifications, reset git, and head back to the top of the loop.</li>
+          </ol>
+
+          <h2>An example “thing that went wrong”</h2>
+          <p>
+            To give you an idea of the work done in each iteration, let’s look at how the frontend handles partial events. The ADK server streams events representing small chunks of content or partial tool execution stages. If the client renders every incoming network event as an individual message bubble in the chat list, the interface becomes fragmented:
+          </p>
+
+          <figure>
+            <img src="/static/images/writing/antigravity-output.png" alt="Broken list items before aggregation" />
+            <figcaption>Look at all those broken list items and half-bolded segments!</figcaption>
+          </figure>
+
+          <p>
+            The fix was aggregating events inside the client's <code>AgentProvider</code> before dispatching them to the UI list:
+          </p>
+
+          <pre><code>await for (final event in stream) {
+  if (event.partial && event.contentText != null) {
+    // Accumulate streaming text
+    _activeStreamingAuthor = event.author;
+    _activeStreamingResponse =
+        (_activeStreamingResponse ?? '') + event.contentText!;
+  } else {
+    // Finished chunk: Clear accumulator and add to permanent events list
+    _activeStreamingResponse = null;
+   
+    final updatedEvents = List&lt;Event&gt;.from(_activeSession!.events)
+        ..add(event);
+
+    _activeSession = Session.fromJson({
+      'id': _activeSession!.id,
+      'app_name': _activeSession!.appName,
+      'user_id': _activeSession!.userId,
+      'events': updatedEvents.map((ev) =&gt; _serializeEvent(ev)).toList(),
+      'state': mergedState,
+    });
+
+    _processCompletedEvent(event);
+  }
+  notifyListeners();
+}</code></pre>
+
+          <h2>Try it yourself</h2>
+          <p>
+            I’m very much a “learn by doing” person, and trying something outside my comfort zone was intimidating. Having this loop gave me a structure to work from, and now I have a solid developer skill that codifies the process. If you haven’t already, check out <a href="https://antigravity.google" target="_blank" rel="noopener">Antigravity</a> and start defining your own custom developer skills!
+          </p>
+        </div>
+
+        <footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem;">
+          <a href="/writing/">← Back to Technical Writing Archive</a>
+        </footer>
+      </article>
+
+      <footer class="site-footer">
+        <p>Andrew Brogdon · <a href="/">Home</a> · <a href="/writing/">Writing</a> · <a href="/poetry/">Poetry</a></p>
+        <p><a href="/feed.xml">RSS Feed</a></p>
+      </footer>
+    </main>
+
+  </div>
+</body>
+</html>
