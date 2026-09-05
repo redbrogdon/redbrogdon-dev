@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Andrew Brogdon · Writing &amp; Poetry</title>
+  <link>https://redbrogdon.dev</link>
+  <description>Essays on developer platforms, generative UI, agentic architectures, and poetry by Andrew Brogdon.</description>
+  <language>en-us</language>
+  <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
+
+  <item>
+    <title>Speeding up generative UI with async A2UI</title>
+    <link>https://redbrogdon.dev/writing/async-a2ui.html</link>
+    <guid>https://redbrogdon.dev/writing/async-a2ui.html</guid>
+    <pubDate>Thu, 13 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Techniques to pre-generate, stream, and cache A2UI messages to eliminate startup latency and improve UI responsiveness in agentic applications.</description>
+  </item>
+
+  <item>
+    <title>Flutter’s multiplatform value for agentic development</title>
+    <link>https://redbrogdon.dev/writing/multiplatform-agents.html</link>
+    <guid>https://redbrogdon.dev/writing/multiplatform-agents.html</guid>
+    <pubDate>Mon, 18 May 2026 00:00:00 GMT</pubDate>
+    <description>Why Flutter's unified codebase architecture significantly reduces token overhead, state fragmentation, and context switching when orchestrating agent workflows.</description>
+  </item>
+
+  <item>
+    <title>New updates to A2UI and Flutter’s GenUI package</title>
+    <link>https://redbrogdon.dev/writing/genui-updates.html</link>
+    <guid>https://redbrogdon.dev/writing/genui-updates.html</guid>
+    <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
+    <description>Architectural changes to the genui package, detailing how the A2UI protocol connects autonomous agents with client-side widget catalogs.</description>
+  </item>
+
+  <item>
+    <title>Harness the Gemini API in your Dart and Flutter Apps</title>
+    <link>https://redbrogdon.dev/writing/gemini-api.html</link>
+    <guid>https://redbrogdon.dev/writing/gemini-api.html</guid>
+    <pubDate>Thu, 15 Feb 2024 00:00:00 GMT</pubDate>
+    <description>A hands-on guide to integrating multimodal generative AI models into client applications with the Dart Gemini SDK.</description>
+  </item>
+
+  <item>
+    <title>Instamatic (Poem)</title>
+    <link>https://redbrogdon.dev/poetry/instamatic.html</link>
+    <guid>https://redbrogdon.dev/poetry/instamatic.html</guid>
+    <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
+    <description>They’re demonstrating space-time again, the bats...</description>
+  </item>
+</channel>
+</rss>

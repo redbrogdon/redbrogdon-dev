@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Writing · Andrew Brogdon</title>
+  <meta name="description" content="Technical essays, architecture deep dives, and articles on generative UI, agentic workflows, and developer platforms by Andrew Brogdon.">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/favicon-180x180.png" type="image/png" />
+  <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
+  <link rel="alternate" type="application/rss+xml" title="Andrew Brogdon · Writing Feed" href="/feed.xml" />
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/css/brands.css">
+</head>
+
+<body>
+  <div class="broadside-layout">
+    
+    <aside class="sidebar">
+      <img src="/static/images/headshot.png" alt="Headshot of Andrew Brogdon" class="avatar" />
+      <h1 class="site-title"><a href="/">Andrew Brogdon</a></h1>
+      <p class="site-tagline">Staff DevRel Engineer & Tech Lead at Google</p>
+
+      <nav class="sidebar-nav">
+        <a href="/">← Return Home</a>
+        <a href="/writing/" class="active">Technical Writing</a>
+        <a href="/poetry/">Poetry Collection ↗</a>
+        <a href="/feed.xml" style="color: var(--link);">RSS Feed ↗</a>
+      </nav>
+
+      <div class="sidebar-social">
+        <a href="https://github.com/redbrogdon" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+        <a href="https://bsky.app/profile/redbrogdon.dev" target="_blank" rel="noopener">
+          <i class="fa-brands fa-bluesky"></i> Bluesky
+        </a>
+        <a href="https://linkedin.com/in/redbrogdon" target="_blank" rel="noopener">
+          <i class="fa-brands fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="https://x.com/redbrogdon" target="_blank" rel="noopener">
+          <i class="fa-brands fa-x-twitter"></i> X / Twitter
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 2.3rem; font-weight: 600; line-height: 1.2; margin-bottom: 0.5rem;">Technical Writing</h2>
+        <p style="color: var(--muted); font-size: 1.15rem;">
+          Essays and technical deep dives on generative UI architectures, the A2UI protocol, multiplatform developer ergonomics, and agentic application design.
+        </p>
+      </header>
+
+      <ul class="editorial-list">
+        <li>
+          <div class="entry-line">
+            <a href="/writing/async-a2ui.html" class="entry-name">Speeding up generative UI with async A2UI</a>
+            <span class="entry-meta">August 2026</span>
+          </div>
+          <p class="entry-desc">
+            How to tackle cold-start latency in generative UI apps. Explores pre-generating, streaming, and caching A2UI messages using the Commis kitchen assistant as a case study.
+          </p>
+          <div class="entry-links">
+            <a href="/writing/async-a2ui.html">Read Article ↗</a>
+            <span class="dot">·</span>
+            <a href="https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui" target="_blank" rel="noopener">Original on Flutter Blog ↗</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="entry-line">
+            <a href="/writing/genui-updates.html" class="entry-name">New updates to A2UI and Flutter’s GenUI package</a>
+            <span class="entry-meta">May 2026</span>
+          </div>
+          <p class="entry-desc">
+            Key architectural changes to the <code>genui</code> package, showing how the A2UI protocol bridges autonomous AI agents with client-side Flutter widget catalogs.
+          </p>
+          <div class="entry-links">
+            <a href="/writing/genui-updates.html">Read Article ↗</a>
+            <span class="dot">·</span>
+            <a href="https://medium.com/flutter/new-updates-to-a2ui-and-flutters-genui-package" target="_blank" rel="noopener">Original on Flutter Blog ↗</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="entry-line">
+            <a href="/writing/multiplatform-agents.html" class="entry-name">Flutter’s multiplatform value for agentic development</a>
+            <span class="entry-meta">May 2026</span>
+          </div>
+          <p class="entry-desc">
+            Why single-codebase architectures minimize state fragmentation, context switching, and token overhead when orchestrating agent workflows across multiple device surfaces.
+          </p>
+          <div class="entry-links">
+            <a href="/writing/multiplatform-agents.html">Read Article ↗</a>
+            <span class="dot">·</span>
+            <a href="https://medium.com/flutter/flutters-multiplatform-value-for-agentic-development" target="_blank" rel="noopener">Original on Flutter Blog ↗</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="entry-line">
+            <a href="/writing/gemini-api.html" class="entry-name">Harness the Gemini API in your Dart and Flutter Apps</a>
+            <span class="entry-meta">February 2024</span>
+          </div>
+          <p class="entry-desc">
+            A practical guide to integrating Google's multimodal Gemini models into client-side Dart and Flutter apps with structured outputs and streaming responses.
+          </p>
+          <div class="entry-links">
+            <a href="/writing/gemini-api.html">Read Article ↗</a>
+            <span class="dot">·</span>
+            <a href="https://medium.com/flutter/harness-the-gemini-api-in-your-dart-and-flutter-apps" target="_blank" rel="noopener">Original on Flutter Blog ↗</a>
+          </div>
+        </li>
+      </ul>
+
+      <footer class="site-footer">
+        <p>Andrew Brogdon · <a href="/">Home</a> · <a href="/poetry/">Poetry</a> · <a href="/feed.xml">RSS Feed</a></p>
+        <p>Hosted on <a href="https://firebase.google.com/products/hosting" target="_blank" rel="noopener">Firebase</a></p>
+      </footer>
+    </main>
+
+  </div>
+</body>
+</html>
