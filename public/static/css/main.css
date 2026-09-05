@@ -1,0 +1,549 @@
+/* Monograph & Broadside Design System */
+:root {
+  --bg: #fbf9f4;
+  --text: #1c1917;
+  --muted: #78716c;
+  --link: #991b1b;
+  --link-hover: #b91c1c;
+  --border: #e7e5e4;
+  --surface: #f4f1ea;
+  --code-bg: #ece8df;
+  --font-serif: 'EB Garamond', Garamond, Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121113;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+    --link: #f43f5e;
+    --link-hover: #fb7185;
+    --border: #27272a;
+    --surface: #1c191f;
+    --code-bg: #232227;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.18rem;
+  line-height: 1.75;
+  padding: 3.5rem 2rem 5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+a:hover {
+  border-bottom-color: var(--link-hover);
+  color: var(--link-hover);
+}
+
+/* Broadside 2-Column Responsive Layout */
+.broadside-layout {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 4.5rem;
+}
+
+@media (max-width: 860px) {
+  .broadside-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* Sticky Desktop Sidebar */
+.sidebar {
+  position: sticky;
+  top: 3.5rem;
+  height: fit-content;
+  font-size: 0.95rem;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.site-title {
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.site-title a {
+  color: var(--text);
+  border-bottom: none;
+}
+
+.site-tagline {
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.35rem;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.sidebar-nav {
+  margin: 2.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.sidebar-nav a {
+  color: var(--muted);
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  color: var(--text);
+}
+
+.sidebar-nav a.active::before {
+  content: '›';
+  color: var(--link);
+  font-weight: bold;
+}
+
+.sidebar-social {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.sidebar-social a {
+  color: var(--muted);
+  border-bottom: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.sidebar-social a:hover {
+  color: var(--text);
+}
+
+.sidebar-social i {
+  width: 16px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* Main Content Area */
+.main-content {
+  min-width: 0;
+}
+
+.lead-bio {
+  font-size: 1.28rem;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.lead-bio p {
+  margin-bottom: 1.25rem;
+}
+
+/* Sections */
+.section {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.section-title {
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.section-action {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.group-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin: 1.85rem 0 1rem;
+}
+
+/* Editorial Lists */
+.editorial-list {
+  list-style: none;
+}
+
+.editorial-list li {
+  margin-bottom: 2.25rem;
+}
+
+.entry-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.entry-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.entry-meta {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.entry-desc {
+  margin: 0.4rem 0 0.5rem;
+  color: var(--text);
+  font-size: 1.08rem;
+}
+
+.entry-links {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.entry-links .dot {
+  margin: 0 0.35rem;
+  color: var(--border);
+}
+
+/* Now Box */
+.now-box {
+  background: var(--surface);
+  border-left: 3px solid var(--link);
+  padding: 1.35rem 1.6rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 2rem;
+}
+
+.now-box p {
+  margin-bottom: 0.6rem;
+  font-size: 1.12rem;
+}
+
+.now-box p:last-child {
+  margin-bottom: 0;
+}
+
+.meta-note {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+}
+
+/* Personal Quirks & Stories */
+.stories-list {
+  list-style: none;
+}
+
+.stories-list li {
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.stories-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--link);
+}
+
+.sheldon-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--surface);
+  padding: 1.25rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.sheldon-thumb {
+  width: 76px;
+  height: 76px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sheldon-caption {
+  font-size: 1.05rem;
+}
+
+.connecting-box {
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 1.4rem 1.6rem;
+  margin-top: 2rem;
+}
+
+.connecting-box h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.connecting-box p {
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+/* Poetry Styling */
+.poem-card {
+  margin-bottom: 2.75rem;
+}
+
+.poem-title {
+  font-size: 1.55rem;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+.poem-title a {
+  color: var(--text);
+  border-bottom: none;
+}
+
+.poem-title a:hover {
+  color: var(--link);
+}
+
+.poem-published {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.poem-content {
+  line-height: 1.85;
+  font-size: 1.18rem;
+}
+
+.poem-content p {
+  margin-bottom: 1rem;
+}
+
+.poem-stanza-indent {
+  margin: 0.85rem 0 0.85rem 3.5rem;
+  font-style: italic;
+  color: var(--link);
+}
+
+.poem-epigraph {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-align: right;
+  font-style: italic;
+}
+
+.poem-page-container {
+  max-width: 680px;
+}
+
+/* Article & Prose Styling */
+.article-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-title {
+  font-size: 2.3rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.article-meta {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.article-body {
+  font-size: 1.18rem;
+  line-height: 1.8;
+}
+
+.article-body p {
+  margin-bottom: 1.4rem;
+}
+
+.article-body h2 {
+  font-size: 1.65rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+.article-body h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 1.25rem 0 1.5rem 2rem;
+}
+
+.article-body li {
+  margin-bottom: 0.5rem;
+}
+
+.article-body blockquote {
+  border-left: 3px solid var(--link);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  margin: 1.5rem 0;
+  display: block;
+}
+
+.article-body figure {
+  margin: 2rem 0;
+}
+
+.article-body figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.article-body code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--code-bg);
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+
+.article-body pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.2rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.article-body pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.canonical-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-footer a {
+  color: var(--muted);
+}
+
+.site-footer a:hover {
+  color: var(--text);
+}
