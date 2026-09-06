@@ -399,6 +399,13 @@ a:hover {
   font-style: italic;
 }
 
+.poem-attribution {
+  margin-top: 2.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
 .poem-page-container {
   max-width: 680px;
 }
