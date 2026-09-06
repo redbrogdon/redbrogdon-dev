@@ -68,13 +68,6 @@ a:hover {
   gap: 4.5rem;
 }
 
-@media (max-width: 860px) {
-  .broadside-layout {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-}
-
 /* Sticky Desktop Sidebar */
 .sidebar {
   position: sticky;
@@ -532,5 +525,104 @@ a:hover {
   color: var(--muted);
   margin-bottom: 2.5rem;
 }
+
+/* Responsive / Mobile Breakpoint */
+@media (max-width: 860px) {
+  body {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .broadside-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .sidebar {
+    position: static;
+    top: auto;
+    border-bottom: none;
+    padding-bottom: 0;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .avatar {
+    width: 68px;
+    height: 68px;
+    margin-bottom: 0.85rem;
+  }
+
+  .site-title {
+    font-size: 1.85rem;
+  }
+
+  .sidebar-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 0.5rem;
+    margin-top: 1.25rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-nav {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+  }
+
+  .sidebar-nav a {
+    gap: 0.25rem;
+  }
+
+  .sidebar-nav a.active::before {
+    display: none;
+  }
+
+  .sidebar-nav a.active {
+    color: var(--link);
+    font-weight: 600;
+  }
+
+  .sidebar-social {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  .sidebar-social a {
+    font-size: 0;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+  }
+
+  .sidebar-social i {
+    width: auto;
+    font-size: 0.95rem;
+  }
+
+  .social-label,
+  .feed-label {
+    display: none;
+  }
+}
+
 
 
