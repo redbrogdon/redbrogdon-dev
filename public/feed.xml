@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Andrew Brogdon · Blog &amp; Poetry</title>
+  <title>Andrew Brogdon · Blog &amp; Media</title>
   <link>https://redbrogdon.dev</link>
-  <description>Essays on developer platforms, generative UI, agentic architectures, and poetry by Andrew Brogdon.</description>
+  <description>Technical essays, architecture deep dives, talks, and podcasts on generative UI, agentic workflows, and developer platforms by Andrew Brogdon.</description>
   <language>en-us</language>
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
+
+  <item>
+    <title>A2UI 0.9.0 and GenUI</title>
+    <link>https://www.youtube.com/watch?v=Ig-zOsnU5F4</link>
+    <guid>https://www.youtube.com/watch?v=Ig-zOsnU5F4</guid>
+    <pubDate>Thu, 13 Aug 2026 18:00:38 GMT</pubDate>
+    <description>Exploring the latest updates to the A2UI protocol and Flutter&apos;s genui package, covering architectural shifts and the new prompt-first approach.</description>
+  </item>
+
+  <item>
+    <title>Very Good Engineering Podcast</title>
+    <link>https://www.youtube.com/watch?v=t1a66tfI7vM</link>
+    <guid>https://www.youtube.com/watch?v=t1a66tfI7vM</guid>
+    <pubDate>Thu, 13 Aug 2026 12:00:00 GMT</pubDate>
+    <description>Joining the Very Good Ventures team to discuss hyper-personalization, generative UI, and developer relations in the agentic era.</description>
+  </item>
 
   <item>
     <title>Speeding up generative UI with async A2UI</title>
     <link>https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui</link>
     <guid>https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui</guid>
     <pubDate>Thu, 13 Aug 2026 00:00:00 GMT</pubDate>
-    <description>Techniques to pre-generate, stream, and cache A2UI messages to eliminate startup latency and improve UI responsiveness in agentic applications.</description>
+    <description>How to tackle cold-start latency in generative UI apps. Explores pre-generating, streaming, and caching A2UI messages using the Commis kitchen assistant as a case study.</description>
   </item>
 
   <item>
@@ -20,7 +36,23 @@
     <link>https://blog.flutter.dev/learning-faster-with-antigravity-cd735bfe44e7</link>
     <guid>https://blog.flutter.dev/learning-faster-with-antigravity-cd735bfe44e7</guid>
     <pubDate>Wed, 01 Jul 2026 04:08:51 GMT</pubDate>
-    <description>Creating Flutter frontends for ADK agents using a structured, iterative 5-step learning loop with Google Antigravity.</description>
+    <description>Creating Flutter frontends for Python-based ADK agents using a structured 5-step learning loop with Google Antigravity.</description>
+  </item>
+
+  <item>
+    <title>Flutter + A2UI = GenUI</title>
+    <link>https://www.youtube.com/watch?v=tXeyaV1gVJk</link>
+    <guid>https://www.youtube.com/watch?v=tXeyaV1gVJk</guid>
+    <pubDate>Thu, 21 May 2026 22:00:48 GMT</pubDate>
+    <description>Introducing A2UI, an open protocol for Generative UI that enables autonomous AI agents to dynamically negotiate and render Flutter interfaces.</description>
+  </item>
+
+  <item>
+    <title>Introducing the Full-stack developer guide (Flutter, Firebase, Angular)</title>
+    <link>https://www.youtube.com/watch?v=hNbY3Bmgojg</link>
+    <guid>https://www.youtube.com/watch?v=hNbY3Bmgojg</guid>
+    <pubDate>Mon, 18 May 2026 16:01:06 GMT</pubDate>
+    <description>Announcing a joint guide from the Flutter, Firebase, and Angular teams demonstrating how to architect and build full-stack, multiplatform apps.</description>
   </item>
 
   <item>
@@ -28,47 +60,71 @@
     <link>https://medium.com/flutter/new-updates-to-a2ui-and-flutters-genui-package</link>
     <guid>https://medium.com/flutter/new-updates-to-a2ui-and-flutters-genui-package</guid>
     <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
-    <description>Architectural changes to the genui package, detailing how the A2UI protocol connects autonomous agents with client-side widget catalogs.</description>
+    <description>Key architectural changes to the genui package, showing how the A2UI protocol bridges autonomous AI agents with client-side Flutter widget catalogs.</description>
   </item>
 
   <item>
-    <title>Instamatic (Poem)</title>
-    <link>https://redbrogdon.dev/poetry/instamatic.html</link>
-    <guid>https://redbrogdon.dev/poetry/instamatic.html</guid>
-    <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
-    <description>First published in Prairie Schooner.</description>
+    <title>Generative UI Deep Dive</title>
+    <link>https://redbrogdon.dev/media/#generative-ui-deep-dive</link>
+    <guid>https://redbrogdon.dev/media/#generative-ui-deep-dive</guid>
+    <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
+    <description>Presented with Yegor Jbanov at Google Cloud Next &apos;26 on moving beyond text-only chatbots by enabling autonomous AI agents to dynamically negotiate and render rich client UIs.</description>
   </item>
 
   <item>
-    <title>We’d Love Your Daughter as the New Face of Our Infant Clothing Line (Poem)</title>
-    <link>https://redbrogdon.dev/poetry/infant-clothing-line.html</link>
-    <guid>https://redbrogdon.dev/poetry/infant-clothing-line.html</guid>
-    <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
-    <description>First published in DIAGRAM (Issue 10.4).</description>
+    <title>Build to Succeed: Developer Relations in the Agentic Era</title>
+    <link>https://verygood.ventures/blog/build-to-succeed-podcast-andrew-brogdon</link>
+    <guid>https://verygood.ventures/blog/build-to-succeed-podcast-andrew-brogdon</guid>
+    <pubDate>Thu, 04 Sep 2025 00:00:00 GMT</pubDate>
+    <description>Discussing the changing landscape of developer advocacy, agentic software workflows, and why storytelling matters in engineering.</description>
   </item>
 
   <item>
-    <title>The Pure Food and Drug Act (Poem)</title>
-    <link>https://redbrogdon.dev/poetry/pure-food-and-drug-act.html</link>
-    <guid>https://redbrogdon.dev/poetry/pure-food-and-drug-act.html</guid>
-    <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
-    <description>First published in La Petite Zine.</description>
+    <title>Agentic apps, part 2 | Observable Flutter #60</title>
+    <link>https://www.youtube.com/watch?v=LwDFKGcIHXA</link>
+    <guid>https://www.youtube.com/watch?v=LwDFKGcIHXA</guid>
+    <pubDate>Thu, 24 Apr 2025 17:39:30 GMT</pubDate>
+    <description>Joining Craig Labenz on Observable Flutter to live-code an agentic experience using Flutter and the Gemini Colorist codelab.</description>
   </item>
 
   <item>
-    <title>This Poem Brought to You (Poem)</title>
-    <link>https://redbrogdon.dev/poetry/this-poem-brought-to-you.html</link>
-    <guid>https://redbrogdon.dev/poetry/this-poem-brought-to-you.html</guid>
-    <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
-    <description>First published in Pleiades.</description>
+    <title>Agentic apps with Flutter | Observable Flutter #59</title>
+    <link>https://www.youtube.com/watch?v=eczLRG3q4V0</link>
+    <guid>https://www.youtube.com/watch?v=eczLRG3q4V0</guid>
+    <pubDate>Thu, 17 Apr 2025 17:57:49 GMT</pubDate>
+    <description>Exploring AI-powered, agentic app concepts and architecture on Observable Flutter with Craig Labenz.</description>
   </item>
 
   <item>
-    <title>History, (Poem)</title>
-    <link>https://redbrogdon.dev/poetry/history.html</link>
-    <guid>https://redbrogdon.dev/poetry/history.html</guid>
-    <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
-    <description>First published in The Sycamore Review.</description>
+    <title>Build agentic apps in Flutter and Angular</title>
+    <link>https://www.youtube.com/watch?v=24xNuDY0y0c</link>
+    <guid>https://www.youtube.com/watch?v=24xNuDY0y0c</guid>
+    <pubDate>Wed, 16 Apr 2025 17:30:42 GMT</pubDate>
+    <description>Teaming up with Mark Thompson to introduce cross-framework resources from Angular, Flutter, and Firebase for agentic user experiences.</description>
+  </item>
+
+  <item>
+    <title>Live Coding with Rivers Cuomo</title>
+    <link>https://www.youtube.com/watch?v=mFWplUx3oZ0</link>
+    <guid>https://www.youtube.com/watch?v=mFWplUx3oZ0</guid>
+    <pubDate>Thu, 16 Jan 2025 19:30:05 GMT</pubDate>
+    <description>Co-hosting a live programming session with Weezer singer/songwriter Rivers Cuomo, hacking on Flutter and Python developer tools.</description>
+  </item>
+
+  <item>
+    <title>Fluttercon Berlin Opening Keynote</title>
+    <link>https://redbrogdon.dev/media/#fluttercon-berlin-keynote</link>
+    <guid>https://redbrogdon.dev/media/#fluttercon-berlin-keynote</guid>
+    <pubDate>Wed, 03 Jul 2024 09:00:00 GMT</pubDate>
+    <description>Opening address at Fluttercon Berlin covering Flutter&apos;s multiplatform trajectory, developer productivity, and ecosystem evolution.</description>
+  </item>
+
+  <item>
+    <title>CodePen Radio #265: Flutter on CodePen</title>
+    <link>https://blog.codepen.io/2020/04/22/265-flutter/</link>
+    <guid>https://blog.codepen.io/2020/04/22/265-flutter/</guid>
+    <pubDate>Wed, 22 Apr 2020 00:00:00 GMT</pubDate>
+    <description>Joining Chris Coyier and Alex Vazquez to explore embedding Flutter compilation and live web runtimes into CodePen.</description>
   </item>
 </channel>
 </rss>
