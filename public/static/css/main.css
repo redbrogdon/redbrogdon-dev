@@ -400,7 +400,7 @@ a:hover {
 }
 
 .poem-attribution {
-  margin-top: 2.25rem;
+  margin-top: 4rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--muted);
@@ -408,6 +408,7 @@ a:hover {
 
 .poem-page-container {
   max-width: 680px;
+  padding-bottom: 5rem;
 }
 
 /* Article & Prose Styling */
