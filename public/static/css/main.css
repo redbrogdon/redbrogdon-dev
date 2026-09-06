@@ -278,10 +278,24 @@ a:hover {
   gap: 1rem;
 }
 
+.entry-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
 .entry-name {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text);
+}
+
+.media-type-icon {
+  color: var(--muted);
+  font-size: 0.9em;
+  opacity: 0.85;
+  flex-shrink: 0;
 }
 
 .entry-meta {
@@ -289,12 +303,6 @@ a:hover {
   font-size: 0.82rem;
   color: var(--muted);
   white-space: nowrap;
-}
-
-.entry-meta i {
-  margin-right: 0.35rem;
-  font-size: 0.9em;
-  opacity: 0.85;
 }
 
 .entry-desc {
