@@ -9,24 +9,24 @@
 
   <item>
     <title>Speeding up generative UI with async A2UI</title>
-    <link>https://redbrogdon.dev/blog/async-a2ui.html</link>
-    <guid>https://redbrogdon.dev/blog/async-a2ui.html</guid>
+    <link>https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui</link>
+    <guid>https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui</guid>
     <pubDate>Thu, 13 Aug 2026 00:00:00 GMT</pubDate>
     <description>Techniques to pre-generate, stream, and cache A2UI messages to eliminate startup latency and improve UI responsiveness in agentic applications.</description>
   </item>
 
   <item>
     <title>Learning faster with Antigravity</title>
-    <link>https://redbrogdon.dev/blog/learning-with-antigravity.html</link>
-    <guid>https://redbrogdon.dev/blog/learning-with-antigravity.html</guid>
+    <link>https://blog.flutter.dev/learning-faster-with-antigravity-cd735bfe44e7</link>
+    <guid>https://blog.flutter.dev/learning-faster-with-antigravity-cd735bfe44e7</guid>
     <pubDate>Wed, 01 Jul 2026 04:08:51 GMT</pubDate>
     <description>Creating Flutter frontends for ADK agents using a structured, iterative 5-step learning loop with Google Antigravity.</description>
   </item>
 
   <item>
     <title>New updates to A2UI and Flutter’s GenUI package</title>
-    <link>https://redbrogdon.dev/blog/genui-updates.html</link>
-    <guid>https://redbrogdon.dev/blog/genui-updates.html</guid>
+    <link>https://medium.com/flutter/new-updates-to-a2ui-and-flutters-genui-package</link>
+    <guid>https://medium.com/flutter/new-updates-to-a2ui-and-flutters-genui-package</guid>
     <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
     <description>Architectural changes to the genui package, detailing how the A2UI protocol connects autonomous agents with client-side widget catalogs.</description>
   </item>
