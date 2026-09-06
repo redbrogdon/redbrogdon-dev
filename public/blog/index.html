@@ -11,8 +11,23 @@
   
   <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/favicon-180x180.png" type="image/png" />
   <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
-  <link rel="alternate" type="application/rss+xml" title="Andrew Brogdon · Writing Feed" href="/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Andrew Brogdon · Blog &amp; Media Feed" href="/feed.xml" />
   <link rel="author" href="/humans.txt" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Andrew Brogdon">
+  <meta property="og:url" content="https://redbrogdon.dev/blog/">
+  <meta property="og:title" content="Blog · Andrew Brogdon">
+  <meta property="og:description" content="Technical essays, architecture deep dives, and articles on generative UI, agentic workflows, and developer platforms by Andrew Brogdon.">
+  <meta property="og:image" content="https://redbrogdon.dev/static/images/headshot.png">
+  <meta property="og:image:alt" content="Andrew Brogdon">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@redbrogdon">
+  <meta name="twitter:creator" content="@redbrogdon">
+  <meta name="twitter:title" content="Blog · Andrew Brogdon">
+  <meta name="twitter:description" content="Technical essays, architecture deep dives, and articles on generative UI, agentic workflows, and developer platforms by Andrew Brogdon.">
+  <meta name="twitter:image" content="https://redbrogdon.dev/static/images/headshot.png">
 
   <!-- Preload local webfonts -->
   <link rel="preload" href="/static/webfonts/eb-garamond-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -26,6 +41,7 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="broadside-layout">
     
     <aside class="sidebar">
@@ -63,7 +79,7 @@
       </div>
     </aside>
 
-    <main class="main-content">
+    <main id="main-content" class="main-content" tabindex="-1">
       <header style="margin-bottom: 2.5rem;">
         <h2 style="font-size: 2.3rem; font-weight: 600; line-height: 1.2; margin-bottom: 0.5rem;">Blog</h2>
         <p style="color: var(--muted); font-size: 1.15rem;">

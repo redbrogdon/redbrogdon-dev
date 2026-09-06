@@ -13,6 +13,18 @@
   <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
   <link rel="author" href="/humans.txt" />
 
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Andrew Brogdon">
+  <meta property="og:title" content="Page Not Found (404) · Andrew Brogdon">
+  <meta property="og:description" content="Page not found.">
+  <meta property="og:image" content="https://redbrogdon.dev/static/images/headshot.png">
+  <meta property="og:image:alt" content="Andrew Brogdon">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Page Not Found (404) · Andrew Brogdon">
+  <meta name="twitter:description" content="Page not found.">
+  <meta name="twitter:image" content="https://redbrogdon.dev/static/images/headshot.png">
+
   <!-- Preload local webfonts -->
   <link rel="preload" href="/static/webfonts/eb-garamond-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/static/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
@@ -25,6 +37,7 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="broadside-layout">
 
     <aside class="sidebar">
@@ -62,7 +75,7 @@
       </div>
     </aside>
 
-    <main class="main-content">
+    <main id="main-content" class="main-content" tabindex="-1">
       <div style="padding-top: 2rem;">
         <p style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--link); font-weight: 600;">404 · NOT
           FOUND</p>
