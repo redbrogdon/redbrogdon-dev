@@ -6,33 +6,6 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [
-      {
-        "source": "/writing",
-        "destination": "/blog/",
-        "type": 301
-      },
-      {
-        "source": "/writing/:path*",
-        "destination": "/blog/",
-        "type": 301
-      },
-      {
-        "source": "/blog/async-a2ui.html",
-        "destination": "https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui",
-        "type": 301
-      },
-      {
-        "source": "/blog/learning-with-antigravity.html",
-        "destination": "https://blog.flutter.dev/learning-faster-with-antigravity-cd735bfe44e7",
-        "type": 301
-      },
-      {
-        "source": "/blog/genui-updates.html",
-        "destination": "https://medium.com/flutter/new-updates-to-a2ui-and-flutters-genui-package",
-        "type": 301
-      }
-    ],
     "headers": [
       {
         "source": "/**",
