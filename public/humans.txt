@@ -1,0 +1,18 @@
+/* TEAM */
+  Creator: Andrew Brogdon
+  Site: https://redbrogdon.dev
+  GitHub: https://github.com/redbrogdon
+
+/* THANKS & ATTRIBUTION */
+  Icons: Font Awesome Free 6.7.2 by Fonticons, Inc.
+    URL: https://fontawesome.com
+    License: CC BY 4.0 (Icons), SIL OFL 1.1 (Fonts), MIT (Code)
+
+  Typography:
+    EB Garamond by Georg Duffner & Octavio Pardo (SIL OFL 1.1)
+    JetBrains Mono by JetBrains (SIL OFL 1.1)
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Hosting: Firebase Hosting
+  Design: Broadside Monograph layout

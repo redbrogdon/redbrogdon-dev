@@ -291,6 +291,12 @@ a:hover {
   white-space: nowrap;
 }
 
+.entry-meta i {
+  margin-right: 0.35rem;
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
 .entry-desc {
   margin: 0.4rem 0 0.5rem;
   color: var(--text);
