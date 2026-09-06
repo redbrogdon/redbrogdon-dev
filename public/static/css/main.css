@@ -172,8 +172,40 @@ a:hover {
   margin-bottom: 2.5rem;
 }
 
+.lead-bio h4 {
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 2rem;
+  margin-bottom: 0.65rem;
+}
+
+.lead-bio h4:first-child {
+  margin-top: 0;
+}
+
 .lead-bio p {
   margin-bottom: 1.25rem;
+}
+
+.lead-bio ul {
+  list-style: none;
+  margin: 0.85rem 0 1.5rem;
+  padding: 0;
+}
+
+.lead-bio li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.75;
+}
+
+.lead-bio li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
 }
 
 /* Sections */
