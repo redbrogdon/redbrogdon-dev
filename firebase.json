@@ -5,6 +5,18 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/writing",
+        "destination": "/blog/",
+        "type": 301
+      },
+      {
+        "source": "/writing/:path*",
+        "destination": "/blog/:path*",
+        "type": 301
+      }
     ]
   }
 }
