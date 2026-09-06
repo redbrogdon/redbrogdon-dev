@@ -8,6 +8,22 @@
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
 
   <item>
+    <title>The Future of Flutter Design Libraries with Widgetbook</title>
+    <link>https://www.youtube.com/watch?v=sWSXWrrqOAY</link>
+    <guid>https://www.youtube.com/watch?v=sWSXWrrqOAY</guid>
+    <pubDate>Thu, 03 Sep 2026 16:00:31 GMT</pubDate>
+    <description>Interviewing Lucas Josefiak, co-founder and CEO of Widgetbook, live at Fluttercon USA on Widgetbook 4, AI coding agents using design systems, and self-healing UI feedback loops.</description>
+  </item>
+
+  <item>
+    <title>Building with Full-stack Dart with Serverpod</title>
+    <link>https://www.youtube.com/watch?v=ZcXFRzilDxk</link>
+    <guid>https://www.youtube.com/watch?v=ZcXFRzilDxk</guid>
+    <pubDate>Wed, 19 Aug 2026 19:00:04 GMT</pubDate>
+    <description>Catching up with Serverpod founder Viktor Lidholt at Fluttercon USA to discuss full-stack hot reload, built-in MCP servers for AI coding agents, and Dart on the backend.</description>
+  </item>
+
+  <item>
     <title>A2UI 0.9.0 and GenUI</title>
     <link>https://www.youtube.com/watch?v=Ig-zOsnU5F4</link>
     <guid>https://www.youtube.com/watch?v=Ig-zOsnU5F4</guid>
@@ -72,11 +88,27 @@
   </item>
 
   <item>
+    <title>Crosswords, Agents, and Flutter</title>
+    <link>https://www.youtube.com/watch?v=SgVUYD9WloY</link>
+    <guid>https://www.youtube.com/watch?v=SgVUYD9WloY</guid>
+    <pubDate>Wed, 12 Nov 2025 20:46:03 GMT</pubDate>
+    <description>Exploring how to identify the right problems to solve with Flutter and AI, featuring an interactive demo using Gemini to solve crossword puzzles.</description>
+  </item>
+
+  <item>
     <title>Build to Succeed: Developer Relations in the Agentic Era</title>
     <link>https://verygood.ventures/blog/build-to-succeed-podcast-andrew-brogdon</link>
     <guid>https://verygood.ventures/blog/build-to-succeed-podcast-andrew-brogdon</guid>
     <pubDate>Thu, 04 Sep 2025 00:00:00 GMT</pubDate>
     <description>Discussing the changing landscape of developer advocacy, agentic software workflows, and why storytelling matters in engineering.</description>
+  </item>
+
+  <item>
+    <title>Fluttercon USA Opening Keynote</title>
+    <link>https://redbrogdon.dev/media/#fluttercon-usa-keynote</link>
+    <guid>https://redbrogdon.dev/media/#fluttercon-usa-keynote</guid>
+    <pubDate>Wed, 25 Jun 2025 09:00:00 GMT</pubDate>
+    <description>Opening address in New York City on "Agentive Experiences with Flutter," exploring how AI models determine dynamic UI states and introducing the Flutter AI Toolkit.</description>
   </item>
 
   <item>
@@ -104,11 +136,11 @@
   </item>
 
   <item>
-    <title>Live Coding with Rivers Cuomo</title>
+    <title>Interview with Rivers Cuomo</title>
     <link>https://www.youtube.com/watch?v=mFWplUx3oZ0</link>
     <guid>https://www.youtube.com/watch?v=mFWplUx3oZ0</guid>
     <pubDate>Thu, 16 Jan 2025 19:30:05 GMT</pubDate>
-    <description>Co-hosting a live programming session with Weezer singer/songwriter Rivers Cuomo, hacking on Flutter and Python developer tools.</description>
+    <description>Sitting down with Rivers Cuomo as part of #FlutterInProduction to talk about Flutter, Firebase, and his apps.</description>
   </item>
 
   <item>
