@@ -41,14 +41,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #121113;
-    --text: #f3f4f6;
-    --muted: #9ca3af;
-    --link: #f43f5e;
-    --link-hover: #fb7185;
-    --border: #27272a;
-    --surface: #1c191f;
-    --code-bg: #232227;
+    --bg: #151413;
+    --text: #ede7dc;
+    --muted: #9d9588;
+    --link: #d99b43;
+    --link-hover: #e6af5c;
+    --border: #312c26;
+    --surface: #1e1b19;
+    --code-bg: #26231f;
   }
 }
 
@@ -578,30 +578,36 @@ a:hover {
   text-align: center;
 }
 
+code,
+kbd,
+samp,
 .article-body code {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: 0.82em;
   background: var(--code-bg);
   padding: 0.15em 0.35em;
   border-radius: 4px;
 }
 
+pre,
 .article-body pre {
   background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 1.2rem;
+  padding: 1.1rem 1.25rem;
   overflow-x: auto;
   margin: 1.5rem 0;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 0.82rem;
+  line-height: 1.6;
 }
 
+pre code,
 .article-body pre code {
   background: transparent;
   padding: 0;
   border-radius: 0;
+  font-size: inherit;
 }
 
 .canonical-box {
