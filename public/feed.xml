@@ -16,6 +16,14 @@
   </item>
 
   <item>
+    <title>Quick, reliable calculations with A2UI&apos;s Client-Side Functions</title>
+    <link>https://flutter.dev/blog/a2ui-client-side-functions</link>
+    <guid>https://flutter.dev/blog/a2ui-client-side-functions</guid>
+    <pubDate>Fri, 28 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Learn how client-side functions allow an agent to delegate local operations directly to Dart code running on a user&apos;s device.</description>
+  </item>
+
+  <item>
     <title>Building with Full-stack Dart with Serverpod</title>
     <link>https://www.youtube.com/watch?v=ZcXFRzilDxk</link>
     <guid>https://www.youtube.com/watch?v=ZcXFRzilDxk</guid>
