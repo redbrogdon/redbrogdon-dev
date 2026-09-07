@@ -461,6 +461,9 @@ a:hover {
 .poem-content {
   line-height: 1.85;
   font-size: 1.18rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .poem-content p {
@@ -469,8 +472,6 @@ a:hover {
 
 .poem-stanza-indent {
   margin: 0.85rem 0 0.85rem 3.5rem;
-  font-style: italic;
-  color: var(--link);
 }
 
 .poem-epigraph {
@@ -479,6 +480,7 @@ a:hover {
   color: var(--muted);
   text-align: right;
   font-style: italic;
+  white-space: normal;
 }
 
 .poem-attribution {
@@ -486,6 +488,7 @@ a:hover {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--muted);
+  white-space: normal;
 }
 
 .poem-page-container {
