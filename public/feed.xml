@@ -41,8 +41,8 @@
 
   <item>
     <title>Speeding up generative UI with async A2UI</title>
-    <link>https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui</link>
-    <guid>https://medium.com/flutter/speeding-up-generative-ui-with-async-a2ui</guid>
+    <link>https://blog.flutter.dev/speeding-up-generative-ui-with-async-a2ui</link>
+    <guid>https://blog.flutter.dev/speeding-up-generative-ui-with-async-a2ui</guid>
     <pubDate>Thu, 13 Aug 2026 00:00:00 GMT</pubDate>
     <description>How to tackle cold-start latency in generative UI apps. Explores pre-generating, streaming, and caching A2UI messages using the Commis kitchen assistant as a case study.</description>
   </item>
@@ -73,8 +73,8 @@
 
   <item>
     <title>New updates to A2UI and Flutter’s GenUI package</title>
-    <link>https://medium.com/flutter/new-updates-to-a2ui-and-flutters-genui-package</link>
-    <guid>https://medium.com/flutter/new-updates-to-a2ui-and-flutters-genui-package</guid>
+    <link>https://blog.flutter.dev/new-updates-to-a2ui-and-flutters-genui-package</link>
+    <guid>https://blog.flutter.dev/new-updates-to-a2ui-and-flutters-genui-package</guid>
     <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
     <description>Key architectural changes to the genui package, showing how the A2UI protocol bridges autonomous AI agents with client-side Flutter widget catalogs.</description>
   </item>
