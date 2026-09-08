@@ -322,18 +322,7 @@ def generate_branch_name(url: str, title: str) -> str:
 
 
 def is_branch_or_pr_pending(repo_root: Path, branch: str) -> bool:
-    """Check if a local branch or open GitHub PR already exists for this branch."""
-    # 1. Check local git branches (unmerged only)
-    res = subprocess.run(
-        ["git", "branch", "--no-merged", "main", "--list", branch],
-        cwd=repo_root,
-        capture_output=True,
-        text=True,
-    )
-    if res.returncode == 0 and res.stdout.strip():
-        return True
-
-    # 2. Check open PRs via GitHub CLI
+    """Check if an open GitHub PR already exists for this branch."""
     try:
         if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
             app_auth = get_github_app_auth(repo_root)
@@ -352,8 +341,8 @@ def is_branch_or_pr_pending(repo_root: Path, branch: str) -> bool:
             prs = json.loads(pr_check.stdout)
             if any(p.get("headRefName") == branch for p in prs):
                 return True
-    except Exception:
-        pass
+    except Exception as e:
+        logger.debug(f"Error checking open PRs: {e}")
 
     return False
 
