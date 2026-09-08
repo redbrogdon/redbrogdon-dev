@@ -82,7 +82,11 @@ def get_github_app_auth(repo_root: Path) -> tuple[str, str] | None:
     if not pem_path:
         return None
 
-    app_id = os.environ.get("GITHUB_APP_ID", "redbrogdon-antigravity").strip()
+    app_id = (
+        os.environ.get("GITHUB_APP_CLIENT_ID")
+        or os.environ.get("GITHUB_APP_ID")
+        or "Iv23liEePSBPOLuM9xpZ"
+    ).strip()
     if not app_id:
         return None
 
@@ -92,25 +96,7 @@ def get_github_app_auth(repo_root: Path) -> tuple[str, str] | None:
         logger.error("PyJWT is required for GitHub App authentication (pip install pyjwt cryptography).")
         return None
 
-    # If app_id is non-numeric slug, query GitHub's public API to resolve to numeric App ID
-    if not app_id.isdigit():
-        try:
-            req = urllib.request.Request(
-                f"https://api.github.com/apps/{app_id}",
-                headers={
-                    "Accept": "application/vnd.github+json",
-                    "User-Agent": "AntigravityBlogWatcher/1.0",
-                },
-            )
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                app_data = json.loads(resp.read().decode("utf-8"))
-                resolved_id = str(app_data["id"])
-                logger.info(f"Resolved GitHub App '{app_id}' to numerical App ID {resolved_id}")
-                app_id = resolved_id
-        except Exception as e:
-            logger.warning(f"Could not resolve GitHub App slug '{app_id}' via API: {e}")
-
-    # Generate RS256 JWT
+    # Generate RS256 JWT using Client ID or App ID as issuer (iss)
     try:
         private_key = pem_path.read_text(encoding="utf-8")
         now = int(time.time())
@@ -123,6 +109,25 @@ def get_github_app_auth(repo_root: Path) -> tuple[str, str] | None:
     except Exception as e:
         logger.error(f"Failed to sign JWT with {pem_path.name}: {e}")
         return None
+
+    # Retrieve numerical App ID if not already known (for commit bot email)
+    numeric_id = os.environ.get("GITHUB_APP_ID", "")
+    if not numeric_id.isdigit():
+        try:
+            meta_req = urllib.request.Request(
+                "https://api.github.com/app",
+                headers={
+                    "Authorization": f"Bearer {jwt_token}",
+                    "Accept": "application/vnd.github+json",
+                    "X-GitHub-Api-Version": "2022-11-28",
+                    "User-Agent": "AntigravityBlogWatcher/1.0",
+                },
+            )
+            with urllib.request.urlopen(meta_req, timeout=10) as resp:
+                meta_data = json.loads(resp.read().decode("utf-8"))
+                numeric_id = str(meta_data.get("id", "4867627"))
+        except Exception:
+            numeric_id = "4867627"
 
     # Find repository installation ID
     installation_id = os.environ.get("GITHUB_APP_INSTALLATION_ID")
@@ -141,6 +146,16 @@ def get_github_app_auth(repo_root: Path) -> tuple[str, str] | None:
                 inst_data = json.loads(resp.read().decode("utf-8"))
                 installation_id = str(inst_data["id"])
                 logger.info(f"Discovered GitHub App installation ID: {installation_id}")
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                logger.error(
+                    "GitHub App is not yet installed on repository 'redbrogdon/redbrogdon-dev'. "
+                    "Please visit https://github.com/settings/apps/redbrogdon-antigravity/installations "
+                    "and install the app on this repository."
+                )
+            else:
+                logger.error(f"Failed to find installation ID for redbrogdon/redbrogdon-dev: {e}")
+            return None
         except Exception as e:
             logger.error(f"Failed to find installation ID for redbrogdon/redbrogdon-dev: {e}")
             return None
@@ -163,7 +178,7 @@ def get_github_app_auth(repo_root: Path) -> tuple[str, str] | None:
             token_data = json.loads(resp.read().decode("utf-8"))
             token = token_data.get("token")
             logger.info("Successfully generated GitHub App installation access token.")
-            return token, app_id
+            return token, numeric_id
     except Exception as e:
         logger.error(f"Failed to obtain installation access token from GitHub API: {e}")
         return None
@@ -308,9 +323,9 @@ def generate_branch_name(url: str, title: str) -> str:
 
 def is_branch_or_pr_pending(repo_root: Path, branch: str) -> bool:
     """Check if a local branch or open GitHub PR already exists for this branch."""
-    # 1. Check local git branches
+    # 1. Check local git branches (unmerged only)
     res = subprocess.run(
-        ["git", "branch", "--list", branch],
+        ["git", "branch", "--no-merged", "main", "--list", branch],
         cwd=repo_root,
         capture_output=True,
         text=True,
@@ -507,9 +522,9 @@ def create_pr_for_article(repo_root: Path, article: dict, blurb_data: dict, dry_
     else:
         token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
 
-    # Check out new branch
+    # Check out new branch (or reset if previously merged)
     logger.info(f"Creating git branch: {branch}")
-    run_git_cmd(["git", "checkout", "-b", branch], cwd=repo_root)
+    run_git_cmd(["git", "checkout", "-B", branch], cwd=repo_root)
 
     try:
         update_blog_html(repo_root, article, desc, month_year)
