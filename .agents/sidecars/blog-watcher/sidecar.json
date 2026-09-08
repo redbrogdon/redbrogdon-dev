@@ -1,13 +1,14 @@
 {
-  "description": "Monitors blog.flutter.dev and blog.dart.dev for new articles by Andrew Brogdon and opens PRs via Gemini",
+  "description": "Monitors blog.flutter.dev and dart.dev/blog for new articles by Andrew Brogdon and opens PRs via Gemini",
   "builtin": "schedule",
   "args": [
-    "0 */6 * * *",
+    "0,30 * * * *",
     "python3",
     "watch.py",
     "--once"
   ],
   "env": {
+    "PATH": "/Library/Frameworks/Python.framework/Versions/3.14/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin",
     "GEMINI_MODEL": "gemini-3.8-flash"
   }
 }

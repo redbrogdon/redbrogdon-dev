@@ -11,7 +11,7 @@ When a new article is detected:
 
 ## Monitored Feeds
 - **Flutter Blog:** `https://blog.flutter.dev/feed.xml`
-- **Dart Blog:** `https://blog.dart.dev/feed.xml`
+- **Dart Blog:** `https://dart.dev/blog/feed.xml`
 
 *(Medium feeds and other external sources are ignored per configuration).*
 
@@ -36,7 +36,7 @@ python3 .agents/sidecars/blog-watcher/watch.py --interval 21600
 The sidecar is registered via `sidecar.json`:
 ```json
 {
-  "description": "Monitors blog.flutter.dev and blog.dart.dev for new articles by Andrew Brogdon and opens PRs via Gemini",
+  "description": "Monitors blog.flutter.dev and dart.dev/blog for new articles by Andrew Brogdon and opens PRs via Gemini",
   "builtin": "schedule",
   "args": [
     "0 */6 * * *",

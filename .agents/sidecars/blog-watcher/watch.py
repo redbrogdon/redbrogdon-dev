@@ -2,7 +2,7 @@
 """
 Antigravity Blog Watcher & Auto-PR Agent
 
-Monitors blog.flutter.dev and blog.dart.dev for new articles by Andrew Brogdon.
+Monitors blog.flutter.dev and dart.dev/blog for new articles by Andrew Brogdon.
 When a new article is discovered, uses Gemini 3.8 to generate an editorial summary,
 updates public/blog/index.html and public/feed.xml, and opens a GitHub PR.
 """
@@ -41,7 +41,7 @@ FEEDS = [
     },
     {
         "name": "Dart Blog",
-        "url": "https://blog.dart.dev/feed.xml",
+        "url": "https://dart.dev/blog/feed.xml",
     },
 ]
 
@@ -558,8 +558,8 @@ def create_pr_for_article(repo_root: Path, article: dict, blurb_data: dict, dry_
 
 
 def run_cycle(repo_root: Path, model_name: str, dry_run: bool = False, slug_filter: str = None, limit: int = None):
-    """Run one detection cycle across blog.flutter.dev and blog.dart.dev."""
-    logger.info("Checking blog.flutter.dev and blog.dart.dev for new articles...")
+    """Run one detection cycle across blog.flutter.dev and dart.dev/blog."""
+    logger.info("Checking blog.flutter.dev and dart.dev/blog for new articles...")
     existing = get_existing_slugs_and_urls(repo_root / "public" / "blog" / "index.html")
 
     new_articles = []
