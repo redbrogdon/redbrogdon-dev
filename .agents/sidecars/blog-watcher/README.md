@@ -47,7 +47,12 @@ The sidecar is registered via `sidecar.json`:
 ```
 It is also symlinked to `~/.gemini/config/sidecars/blog-watcher` for global Antigravity discovery.
 
-## Environment Variables
+## Authentication & Environment Variables
+
+The sidecar supports authenticating as a GitHub App (preferred) or via a personal access token.
+
 - `GEMINI_MODEL`: Gemini model identifier (default: `gemini-3.8-flash`).
 - `GEMINI_API_KEY`: API key for Google GenAI / Gemini API.
-- `GITHUB_TOKEN`: Optional GitHub personal access token if not using `gh auth login`.
+- `GITHUB_APP_ID`: GitHub App slug (e.g. `redbrogdon-antigravity`) or numerical App ID.
+- `github.pem`: Private key file placed in `.agents/sidecars/blog-watcher/github.pem` (mode `600`, ignored by git).
+- `GITHUB_TOKEN` / `GH_TOKEN`: Fallback GitHub personal access token if not using GitHub App.

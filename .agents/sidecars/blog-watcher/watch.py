@@ -69,6 +69,106 @@ def find_repo_root() -> Path:
     return Path(os.getcwd())
 
 
+def get_github_app_auth(repo_root: Path) -> tuple[str, str] | None:
+    """
+    Authenticate as a GitHub App using github.pem and GITHUB_APP_ID.
+    Returns (installation_access_token, app_id_or_slug) or None if not configured.
+    """
+    pem_candidates = [
+        repo_root / ".agents" / "sidecars" / "blog-watcher" / "github.pem",
+        Path.home() / ".gemini" / "config" / "sidecars" / "blog-watcher" / "github.pem",
+    ]
+    pem_path = next((p for p in pem_candidates if p.exists()), None)
+    if not pem_path:
+        return None
+
+    app_id = os.environ.get("GITHUB_APP_ID", "redbrogdon-antigravity").strip()
+    if not app_id:
+        return None
+
+    try:
+        import jwt
+    except ImportError:
+        logger.error("PyJWT is required for GitHub App authentication (pip install pyjwt cryptography).")
+        return None
+
+    # If app_id is non-numeric slug, query GitHub's public API to resolve to numeric App ID
+    if not app_id.isdigit():
+        try:
+            req = urllib.request.Request(
+                f"https://api.github.com/apps/{app_id}",
+                headers={
+                    "Accept": "application/vnd.github+json",
+                    "User-Agent": "AntigravityBlogWatcher/1.0",
+                },
+            )
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                app_data = json.loads(resp.read().decode("utf-8"))
+                resolved_id = str(app_data["id"])
+                logger.info(f"Resolved GitHub App '{app_id}' to numerical App ID {resolved_id}")
+                app_id = resolved_id
+        except Exception as e:
+            logger.warning(f"Could not resolve GitHub App slug '{app_id}' via API: {e}")
+
+    # Generate RS256 JWT
+    try:
+        private_key = pem_path.read_text(encoding="utf-8")
+        now = int(time.time())
+        payload = {
+            "iat": now - 60,
+            "exp": now + (10 * 60),
+            "iss": str(app_id),
+        }
+        jwt_token = jwt.encode(payload, private_key, algorithm="RS256")
+    except Exception as e:
+        logger.error(f"Failed to sign JWT with {pem_path.name}: {e}")
+        return None
+
+    # Find repository installation ID
+    installation_id = os.environ.get("GITHUB_APP_INSTALLATION_ID")
+    if not installation_id:
+        try:
+            inst_req = urllib.request.Request(
+                "https://api.github.com/repos/redbrogdon/redbrogdon-dev/installation",
+                headers={
+                    "Authorization": f"Bearer {jwt_token}",
+                    "Accept": "application/vnd.github+json",
+                    "X-GitHub-Api-Version": "2022-11-28",
+                    "User-Agent": "AntigravityBlogWatcher/1.0",
+                },
+            )
+            with urllib.request.urlopen(inst_req, timeout=10) as resp:
+                inst_data = json.loads(resp.read().decode("utf-8"))
+                installation_id = str(inst_data["id"])
+                logger.info(f"Discovered GitHub App installation ID: {installation_id}")
+        except Exception as e:
+            logger.error(f"Failed to find installation ID for redbrogdon/redbrogdon-dev: {e}")
+            return None
+
+    # Request an installation access token
+    try:
+        token_req = urllib.request.Request(
+            f"https://api.github.com/app/installations/{installation_id}/access_tokens",
+            data=b"{}",
+            headers={
+                "Authorization": f"Bearer {jwt_token}",
+                "Accept": "application/vnd.github+json",
+                "X-GitHub-Api-Version": "2022-11-28",
+                "User-Agent": "AntigravityBlogWatcher/1.0",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(token_req, timeout=10) as resp:
+            token_data = json.loads(resp.read().decode("utf-8"))
+            token = token_data.get("token")
+            logger.info("Successfully generated GitHub App installation access token.")
+            return token, app_id
+    except Exception as e:
+        logger.error(f"Failed to obtain installation access token from GitHub API: {e}")
+        return None
+
+
 def fetch_feed(url: str) -> str:
     """Fetch raw XML from an Atom/RSS feed URL, following redirects."""
     headers = {"User-Agent": "AntigravityBlogWatcher/1.0 (+https://redbrogdon.dev)"}
@@ -220,6 +320,12 @@ def is_branch_or_pr_pending(repo_root: Path, branch: str) -> bool:
 
     # 2. Check open PRs via GitHub CLI
     try:
+        if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
+            app_auth = get_github_app_auth(repo_root)
+            if app_auth:
+                os.environ["GH_TOKEN"] = app_auth[0]
+                os.environ["GITHUB_TOKEN"] = app_auth[0]
+
         pr_check = subprocess.run(
             ["gh", "pr", "list", "--state", "open", "--json", "headRefName"],
             cwd=repo_root,
@@ -359,8 +465,11 @@ def update_rss_feed(repo_root: Path, article: dict, description: str, rfc822_dat
         logger.error("Could not find atom:link tag in public/feed.xml")
 
 
-def run_git_cmd(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess:
-    return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, check=True)
+def run_git_cmd(cmd: list[str], cwd: Path, env: dict = None) -> subprocess.CompletedProcess:
+    full_env = os.environ.copy()
+    if env:
+        full_env.update(env)
+    return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, check=True, env=full_env)
 
 
 def create_pr_for_article(repo_root: Path, article: dict, blurb_data: dict, dry_run: bool = False):
@@ -379,6 +488,25 @@ def create_pr_for_article(repo_root: Path, article: dict, blurb_data: dict, dry_
         logger.info(f"[DRY-RUN] Would execute: gh pr create --title \"Add blog post: {title}\" --head \"{branch}\"")
         return
 
+    # Check for GitHub App credentials first, fall back to GITHUB_TOKEN / GH_TOKEN
+    app_auth = get_github_app_auth(repo_root)
+    git_commit_env = {}
+    if app_auth:
+        token, app_id = app_auth
+        os.environ["GITHUB_TOKEN"] = token
+        os.environ["GH_TOKEN"] = token
+        bot_name = "redbrogdon-antigravity[bot]"
+        bot_email = f"{app_id}+{bot_name}@users.noreply.github.com"
+        git_commit_env = {
+            "GIT_AUTHOR_NAME": bot_name,
+            "GIT_AUTHOR_EMAIL": bot_email,
+            "GIT_COMMITTER_NAME": bot_name,
+            "GIT_COMMITTER_EMAIL": bot_email,
+        }
+        logger.info(f"Using GitHub App identity: {bot_name} <{bot_email}>")
+    else:
+        token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+
     # Check out new branch
     logger.info(f"Creating git branch: {branch}")
     run_git_cmd(["git", "checkout", "-b", branch], cwd=repo_root)
@@ -390,11 +518,10 @@ def create_pr_for_article(repo_root: Path, article: dict, blurb_data: dict, dry_
         # Stage and commit conforming to git-commit-workflow
         run_git_cmd(["git", "add", "public/blog/index.html", "public/feed.xml"], cwd=repo_root)
         commit_msg = f"Add {title[:35]} to blog and feed"
-        run_git_cmd(["git", "commit", "-m", commit_msg], cwd=repo_root)
+        run_git_cmd(["git", "commit", "-m", commit_msg], cwd=repo_root, env=git_commit_env)
         logger.info(f"Committed: {commit_msg}")
 
-        # Push branch via HTTPS using the PAT
-        token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+        # Push branch via HTTPS using the token
         if token:
             logger.info(f"Pushing branch {branch} to GitHub via authenticated HTTPS...")
             push_url = f"https://x-access-token:{token}@github.com/redbrogdon/redbrogdon-dev.git"
