@@ -8,6 +8,14 @@
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
 
   <item>
+    <title>Architects, testers, and coders: Building multi-agent development teams</title>
+    <link>https://flutter.dev/blog/building-multi-agent-dev-teams</link>
+    <guid>https://flutter.dev/blog/building-multi-agent-dev-teams</guid>
+    <pubDate>Thu, 20 Aug 2026 00:00:00 GMT</pubDate>
+    <description>An examination of how coordinated multi-agent teams in Google Antigravity can translate Python libraries into idiomatic Dart packages. Explores a disciplined, test-driven development workflow that divides labor across architect, coder, and tester roles.</description>
+  </item>
+
+  <item>
     <title>The Future of Flutter Design Libraries with Widgetbook</title>
     <link>https://www.youtube.com/watch?v=sWSXWrrqOAY</link>
     <guid>https://www.youtube.com/watch?v=sWSXWrrqOAY</guid>
