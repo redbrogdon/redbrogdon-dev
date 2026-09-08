@@ -1,0 +1,9 @@
+{
+  "description": "Monitors blog.flutter.dev and blog.dart.dev for new articles by Andrew Brogdon and opens PRs via Gemini 3.8",
+  "command": "python3",
+  "args": ["watch.py", "--interval", "21600"],
+  "restart_policy": "always",
+  "env": {
+    "GEMINI_MODEL": "gemini-3.8-flash"
+  }
+}
