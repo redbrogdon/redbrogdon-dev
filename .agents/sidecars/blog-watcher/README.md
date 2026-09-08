@@ -36,16 +36,20 @@ python3 .agents/sidecars/blog-watcher/watch.py --interval 21600
 The sidecar is registered via `sidecar.json`:
 ```json
 {
-  "description": "Monitors blog.flutter.dev and blog.dart.dev for new articles by Andrew Brogdon and opens PRs via Gemini 3.8",
-  "command": "python3",
-  "args": ["watch.py", "--interval", "21600"],
-  "restart_policy": "always",
+  "description": "Monitors blog.flutter.dev and blog.dart.dev for new articles by Andrew Brogdon and opens PRs via Gemini",
+  "builtin": "schedule",
+  "args": [
+    "0 */6 * * *",
+    "python3",
+    "watch.py",
+    "--once"
+  ],
   "env": {
     "GEMINI_MODEL": "gemini-3.8-flash"
   }
 }
 ```
-It is also symlinked to `~/.gemini/config/sidecars/blog-watcher` for global Antigravity discovery.
+It runs periodically via Antigravity's scheduler without staying resident in memory, and is symlinked to `~/.gemini/config/sidecars/blog-watcher` for global discovery.
 
 ## Authentication & Environment Variables
 
