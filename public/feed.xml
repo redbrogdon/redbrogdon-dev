@@ -8,6 +8,14 @@
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
 
   <item>
+    <title>Some Options for Deserializing JSON with Flutter</title>
+    <link>https://flutter.dev/blog/some-options-for-deserializing-json-with-flutter</link>
+    <guid>https://flutter.dev/blog/some-options-for-deserializing-json-with-flutter</guid>
+    <pubDate>Thu, 02 Aug 2018 00:00:00 GMT</pubDate>
+    <description>A comparative study of JSON deserialization strategies in Flutter, weighing hand-rolled parsing against automated code generation. Explores how to balance type safety, ergonomics, and maintenance overhead across projects of varying scale.</description>
+  </item>
+
+  <item>
     <title>The Future of Flutter Design Libraries with Widgetbook</title>
     <link>https://www.youtube.com/watch?v=sWSXWrrqOAY</link>
     <guid>https://www.youtube.com/watch?v=sWSXWrrqOAY</guid>
