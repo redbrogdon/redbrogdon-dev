@@ -19,15 +19,20 @@ import sys
 import time
 import urllib.request
 import xml.etree.ElementTree as ET
+from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 # Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(asctime)s] [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
+log_format = "[%(asctime)s] [%(levelname)s] %(message)s"
+log_datefmt = "%Y-%m-%d %H:%M:%S"
+logging.basicConfig(level=logging.INFO, format=log_format, datefmt=log_datefmt)
 logger = logging.getLogger("blog-watcher")
+
+# Persistent file log in the sidecar directory (ignored by git via *.log)
+log_file = Path(__file__).resolve().parent / "watcher.log"
+file_handler = RotatingFileHandler(log_file, maxBytes=1_000_000, backupCount=3, encoding="utf-8")
+file_handler.setFormatter(logging.Formatter(log_format, datefmt=log_datefmt))
+logger.addHandler(file_handler)
 
 FEEDS = [
     {
