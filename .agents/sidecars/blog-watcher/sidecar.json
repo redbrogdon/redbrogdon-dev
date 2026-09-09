@@ -2,7 +2,7 @@
   "description": "Monitors blog.flutter.dev and dart.dev/blog for new articles by Andrew Brogdon and opens PRs via Gemini",
   "builtin": "schedule",
   "args": [
-    "0,30 * * * *",
+    "0 */6 * * *",
     "python3",
     "watch.py",
     "--once"
