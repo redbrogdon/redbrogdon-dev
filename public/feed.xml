@@ -8,6 +8,14 @@
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
 
   <item>
+    <title>Enabling My Vanity with Antigravity Sidecars</title>
+    <link>https://redbrogdon.dev/blog/enabling-my-vanity-with-antigravity-sidecars.html</link>
+    <guid>https://redbrogdon.dev/blog/enabling-my-vanity-with-antigravity-sidecars.html</guid>
+    <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
+    <description>How I used Google Antigravity background sidecars, GitHub Apps, and Gemini 3.8 to build an automated watcher that keeps my personal site&apos;s bibliography up to date.</description>
+  </item>
+
+  <item>
     <title>Some Options for Deserializing JSON with Flutter</title>
     <link>https://flutter.dev/blog/some-options-for-deserializing-json-with-flutter</link>
     <guid>https://flutter.dev/blog/some-options-for-deserializing-json-with-flutter</guid>

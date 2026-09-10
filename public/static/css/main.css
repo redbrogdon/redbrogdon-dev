@@ -524,6 +524,20 @@ a:hover {
   margin-bottom: 0.75rem;
 }
 
+.article-title-image {
+  margin: 0 0 1.25rem 0;
+  line-height: 0;
+}
+
+.blog-header-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
 .article-meta {
   font-family: var(--font-mono);
   font-size: 0.85rem;

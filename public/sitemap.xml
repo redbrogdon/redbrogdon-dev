@@ -13,6 +13,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://redbrogdon.dev/blog/enabling-my-vanity-with-antigravity-sidecars.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://redbrogdon.dev/media/</loc>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>

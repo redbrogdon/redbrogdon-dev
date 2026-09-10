@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Enabling My Vanity with Antigravity Sidecars · Andrew Brogdon</title>
+  <meta name="description"
+    content="How I used Google Antigravity background sidecars, GitHub Apps, and Gemini 3.8 to build an automated watcher that keeps my personal site's bibliography up to date.">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/favicon-180x180.png" type="image/png" />
+  <link rel="icon" sizes="16x16" href="/static/icon/favicon-16x16.png" type="image/png" />
+  <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
+  <link rel="icon" sizes="96x96" href="/static/icon/favicon-96x96.png" type="image/png" />
+  <link rel="icon" sizes="192x192" href="/static/icon/favicon-192x192.png" type="image/png" />
+  <link rel="icon" sizes="512x512" href="/static/icon/favicon-512x512.png" type="image/png" />
+  <link rel="alternate" type="application/rss+xml" title="Andrew Brogdon · Blog &amp; Media Feed" href="/feed.xml" />
+  <link rel="author" href="/humans.txt" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Andrew Brogdon">
+  <meta property="og:url" content="https://redbrogdon.dev/blog/enabling-my-vanity-with-antigravity-sidecars.html">
+  <meta property="og:title" content="Enabling My Vanity with Antigravity Sidecars · Andrew Brogdon">
+  <meta property="og:description"
+    content="How I used Google Antigravity background sidecars, GitHub Apps, and Gemini 3.8 to build an automated watcher that keeps my personal site's bibliography up to date.">
+  <meta property="og:image" content="https://redbrogdon.dev/static/images/blog/enabling-my-vanity-with-antigravity-sidecars.png">
+  <meta property="og:image:secure_url" content="https://redbrogdon.dev/static/images/blog/enabling-my-vanity-with-antigravity-sidecars.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Enabling My Vanity with Antigravity Sidecars">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@redbrogdon">
+  <meta name="twitter:creator" content="@redbrogdon">
+  <meta name="twitter:title" content="Enabling My Vanity with Antigravity Sidecars · Andrew Brogdon">
+  <meta name="twitter:description"
+    content="How I used Google Antigravity background sidecars, GitHub Apps, and Gemini 3.8 to build an automated watcher that keeps my personal site's bibliography up to date.">
+  <meta name="twitter:image" content="https://redbrogdon.dev/static/images/blog/enabling-my-vanity-with-antigravity-sidecars.png">
+  <meta name="twitter:image:alt" content="Enabling My Vanity with Antigravity Sidecars">
+
+  <!-- Preload local webfonts -->
+  <link rel="preload" href="/static/webfonts/eb-garamond-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/css/brands.css">
+
+  <!-- Game of Life Background Shader -->
+  <script defer src="/static/js/game-of-life.js"></script>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="broadside-layout">
+
+    <aside class="sidebar">
+      <a href="/" class="avatar-link">
+        <img src="/static/images/headshot.png" alt="Headshot of Andrew Brogdon"
+          title="This picture is a lie. I'm rarely outside." class="avatar" />
+      </a>
+      <h1 class="site-title"><a href="/">Andrew Brogdon</a></h1>
+
+      <div class="sidebar-links">
+        <nav class="sidebar-nav">
+          <a href="/">Home</a>
+          <a href="/blog/" class="active">Blog</a>
+          <a href="/media/">Media</a>
+          <a href="/poetry/">Poetry</a>
+          <a href="/feed.xml">RSS<span class="feed-label"> feed</span></a>
+        </nav>
+
+        <div class="sidebar-social">
+          <a href="https://github.com/redbrogdon" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i> <span class="social-label">GitHub</span>
+          </a>
+          <a href="https://bsky.app/profile/redbrogdon.dev" target="_blank" rel="noopener" title="Bluesky"
+            aria-label="Bluesky">
+            <i class="fa-brands fa-bluesky"></i> <span class="social-label">Bluesky</span>
+          </a>
+          <a href="https://linkedin.com/in/redbrogdon" target="_blank" rel="noopener" title="LinkedIn"
+            aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin"></i> <span class="social-label">LinkedIn</span>
+          </a>
+          <a href="https://x.com/redbrogdon" target="_blank" rel="noopener" title="X / Twitter"
+            aria-label="X / Twitter">
+            <i class="fa-brands fa-x-twitter"></i> <span class="social-label">X / Twitter</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1-BJMOylQNp1Rth1K4PTJAfbRyiPhpA9U/view" target="_blank"
+            rel="noopener" title="Resume" aria-label="Resume">
+            <i class="fa-brands fa-google-drive"></i> <span class="social-label">Resume</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <main id="main-content" class="main-content" tabindex="-1">
+      <article class="article-container">
+
+        <header class="article-header">
+          <h1 class="article-title-image">
+            <picture>
+              <source srcset="/static/images/blog/enabling-my-vanity-with-antigravity-sidecars-light.png" media="(prefers-color-scheme: dark)">
+              <img src="/static/images/blog/enabling-my-vanity-with-antigravity-sidecars-dark.png" alt="Enabling My Vanity with Antigravity Sidecars" class="blog-header-image" width="600" height="315">
+            </picture>
+          </h1>
+          <div class="article-meta">
+            <time datetime="2026-09-14">September 14, 2026</time>
+            <span>·</span>
+            <span>Andrew Brogdon</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+        <div class="article-body">
+          <p>
+            Let's be honest: I have done some real things in software over the course of my career, but I'm not one of the big name folks with a closet full of tailored T-shirts and a long line of keynote speaking invitations.
+          </p>
+
+          <p>
+            Even so, I still maintain a personal website, largely because having one makes me feel like a big deal.
+          </p>
+
+          <p>
+            And because I have this site, it is obviously of utmost, earth-shattering importance that my readers get immediate updates the second I publish anything new. Over the years, I've written deep dives and architectural essays across the official Flutter and Dart publications. In theory, whenever an article goes live, I should immediately open my site repo, format a new entry for <code>public/blog/index.html</code>, write a brief editorial blurb that matches my site’s tone, update the RSS feed, push a branch, and open a pull request.
+          </p>
+
+          <p>
+            In practice, I'm a scatterbrain and forget.
+          </p>
+
+          <p>
+            When Google Antigravity introduced <strong>Sidecars</strong>—managed background processes that run alongside your development environment—I realized they could help me keep things up to date without relying on my proven-to-be-underwhelming ability to remember details. By the time I was done, I had learned a thing or two that seemed worth sharing.
+          </p>
+
+          <h2>What Exactly Is an Antigravity Sidecar?</h2>
+
+          <p>
+            In Antigravity, a sidecar is a long-running or periodic background process whose lifecycle is managed directly by the platform.
+          </p>
+
+          <p>
+            Unlike general CLI daemons or cron jobs hidden away in your operating system, you just create a directory inside your project (or your global user config) with a tiny configuration file:
+          </p>
+
+          <pre><code>my-project/
+├── .agents/
+│   └── sidecars/
+│       └── my-sidecar/
+│           ├── sidecar.json   &lt;-- The declaration
+│           └── watch.py       &lt;-- The implementation</code></pre>
+
+          <p>
+            Antigravity monitors these directories, launches the processes when you open your workspace, handles automated restarts, and tracks process logs directly in your IDE's Auxiliary Pane and Output channels.
+          </p>
+
+          <p>
+            If you know how to write a script that runs in a loop or executes a periodic check, you already know how to write a sidecar.
+          </p>
+
+          <h2>The Architecture: Determinism vs. Agency</h2>
+
+          <p>
+            One of the first things I learned is the need to divide the work into subtasks and decide up front whether agentic or deterministic code will be better at getting them done correctly every time.
+          </p>
+
+          <p>
+            At first, I gave everything to the agent: <em>"Please check the web for any articles I wrote, update my HTML, format git commits, and open a PR."</em>
+          </p>
+
+          <p>
+            That approach is brittle. LLMs can hallucinate URLs, stumble over exact branch naming limits, or fail unpredictably when formatting raw RSS XML. In the end, my strategy was to let deterministic code handle the plumbing, and let the model handle the semantic synthesis of summaries and blurbs.
+          </p>
+
+          <figure>
+            <img src="/static/images/blog/sidecar-architecture.png" alt="Antigravity Sidecar Pipeline: Deterministic vs. Agentic Workflow" width="800" height="512">
+            <figcaption>Antigravity Sidecar Pipeline: Deterministic plumbing vs. Agentic synthesis</figcaption>
+          </figure>
+
+          <p>
+            Deterministic code handles fetching the feeds, deduplication, Git branch enforcement, local logging, and GitHub App token minting. The LLM handles reading the full article text and condensing it into a tailored synopsis that matches my site’s specific voice.
+          </p>
+
+          <h2>Step 1: Declaring the Sidecar (<code>sidecar.json</code>)</h2>
+
+          <p>
+            To register a sidecar with Antigravity, you just create a directory inside <code>.agents/sidecars/</code> (for project-scoped sidecars) or <code>~/.gemini/config/sidecars/</code> (for machine-wide sidecars). Inside, drop a <code>sidecar.json</code> file:
+          </p>
+
+          <pre><code>{
+  "description": "Monitors blog.flutter.dev and dart.dev/blog for new articles and opens PRs via Gemini",
+  "builtin": "schedule",
+  "args": [
+    "0 */6 * * *",
+    "python3",
+    "watch.py",
+    "--once"
+  ],
+  "env": {
+    "GEMINI_MODEL": "gemini-3.8-flash"
+  }
+}</code></pre>
+
+          <p>
+            Instead of running a persistent daemon that idly eats memory between runs, Antigravity’s built-in scheduler acts as the cron manager. Because the sidecar’s directory acts as its working directory, Antigravity triggers <code>python3 watch.py --once</code> directly inside the sidecar folder every six hours, lets it perform the scan and open any needed PRs, and then terminates cleanly.
+          </p>
+
+          <h3>Security by Default: Explicit Activation</h3>
+
+          <p>
+            For safety, Antigravity <strong>disables all sidecars by default</strong>. Simply cloning an open-source project from GitHub or opening an unfamiliar repository will never quietly spin up background processes on your machine without your permission.
+          </p>
+
+          <p>
+            To activate your sidecar, you explicitly opt in by adding it to your global configuration file (<code>~/.gemini/config/config.json</code>):
+          </p>
+
+          <pre><code>{
+  "sidecars": {
+    "blog-watcher": {
+      "enabled": true
+    }
+  }
+}</code></pre>
+
+          <p>
+            Once enabled, Antigravity registers the task, and it surfaces directly under <strong>Scheduled Tasks</strong> in the left sidebar—where you can inspect its schedule, view its status, or click <strong>Run Now</strong> to trigger an on-demand check anytime.
+          </p>
+
+          <h2>Step 2: The Deterministic Engine</h2>
+
+          <p>
+            The core loop in Python is straightforward. Every six hours, it pulls the Atom feeds for the designated developer blogs:
+          </p>
+
+          <pre><code># Monitored feeds
+FEEDS = [
+    {"name": "Flutter Blog", "url": "https://blog.flutter.dev/feed.xml"},
+    {"name": "Dart Blog", "url": "https://dart.dev/blog/feed.xml"},
+]</code></pre>
+
+          <p>
+            It parses the XML, checks for matching author tags, and cross-references the links against two things:
+          </p>
+
+          <ol>
+            <li>Slugs already indexed in <code>public/blog/index.html</code>.</li>
+            <li>Branches with active, open PRs on GitHub (via <code>gh pr list --state open</code>).</li>
+          </ol>
+
+          <p>
+            That second check is crucial for any background bot:
+          </p>
+
+          <pre><code>def is_branch_or_pr_pending(repo_root: Path, branch: str) -&gt; bool:
+    """Avoid re-running or spamming GitHub if a PR is already in review."""
+    pr_check = subprocess.run(
+        ["gh", "pr", "list", "--state", "open", "--json", "headRefName"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        env=os.environ,
+    )
+    if pr_check.returncode == 0 and pr_check.stdout.strip():
+        prs = json.loads(pr_check.stdout)
+        if any(p.get("headRefName") == branch for p in prs):
+            return True
+    return False</code></pre>
+
+          <p>
+            If a PR is already open, the sidecar logs a polite notice and exits cleanly, waiting for the next scheduled execution. No duplicate branches, no merge conflicts, and no wasted API tokens.
+          </p>
+
+          <p>
+            Because background sidecars run quietly while you work on other things, I also added a rotating log file (<code>watcher.log</code>) right in the sidecar directory. Whenever I want to know when it last ran or what it detected, I can just click the log file in my editor.
+          </p>
+
+          <h2>Step 3: Bringing in an LLM</h2>
+
+          <p>
+            Once the deterministic engine finds an article that is genuinely new and unaddressed, it calls in the LLM.
+          </p>
+
+          <p>
+            Obviously, I have my own stylistic flair that demands new, customized summaries! On my website, blog entries don't just use the raw marketing teaser from the feed; they have short, tailored summaries that frame what the post is about. Writing those summaries is creative work—the exact kind of task where modern models excel.
+          </p>
+
+          <p>
+            Using the Google GenAI SDK, I hand the model the article's raw text along with explicit style constraints:
+          </p>
+
+          <pre><code>from google import genai
+
+client = genai.Client()
+
+prompt = f"""You are an assistant for Andrew Brogdon's personal website (redbrogdon.dev).
+The website has a refined, thoughtful tone for technical essays and deep dives.
+
+Write a 1-2 sentence editorial summary for this new article to appear on the site.
+Title: {article['title']}
+URL: {article['url']}
+Content:
+{article['summary']}
+
+Respond in JSON with:
+{{
+  "description": "1-2 sentence description matching site tone",
+  "pr_summary": "Detailed summary explaining why this PR is being created"
+}}
+"""
+
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents=prompt,
+    config={"response_mime_type": "application/json"},
+)</code></pre>
+
+          <p>
+            With structured JSON output enabled, the model returns clean, parseable data—giving me both the editorial blurb for the HTML template and an informative PR description.
+          </p>
+
+          <h2>Step 4: A Bot with a Real Identity (GitHub Apps)</h2>
+
+          <p>
+            When you automate pull requests from a background script, you don't want the commits and PRs to look like you opened them by hand. You want clear provenance: an official bot badge so you can easily see which PRs were generated autonomously.
+          </p>
+
+          <p>
+            Rather than relying on brittle personal access tokens (PATs), you can configure the sidecar to <a href="https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation" target="_blank" rel="noopener">authenticate as a GitHub App installation</a>. This approach gives you the ability to strictly limit what the bot is allowed to do on GitHub (for instance, granting write access only to contents and pull requests while keeping everything else locked down), in addition to providing fine-grained repository permissions and short-lived access tokens:
+          </p>
+
+          <pre><code>import jwt  # PyJWT
+
+# 1. Sign a 10-minute JWT using RS256 and the App's private key
+now = int(time.time())
+payload = {
+    "iat": now - 60,
+    "exp": now + 600,
+    "iss": os.environ["GITHUB_APP_CLIENT_ID"],
+}
+jwt_token = jwt.encode(payload, private_key_pem, algorithm="RS256")
+
+# 2. Exchange the JWT for a short-lived repository installation token
+# POST https://api.github.com/app/installations/{installation_id}/access_tokens
+# -&gt; Returns an installation token starting with ghs_...</code></pre>
+
+          <p>
+            When creating the branch and commit, we configure Git's environment variables to reflect the bot:
+          </p>
+
+          <pre><code>GIT_AUTHOR_NAME="redbrogdon-antigravity[bot]"
+GIT_AUTHOR_EMAIL="&lt;app-id&gt;+redbrogdon-antigravity[bot]@users.noreply.github.com"</code></pre>
+
+          <p>
+            And when pushing over HTTPS, Git authenticates using <code>x-access-token:{token}</code>.
+          </p>
+
+          <p>
+            The result? When the PR lands on GitHub, it carries the official GitHub App verification badge:
+          </p>
+
+          <figure>
+            <img src="/static/images/blog/github-pr-bot.png" alt="Screenshot of GitHub Pull Request #4 showing verified bot badge and Gemini-authored editorial description" width="1100" height="368">
+            <figcaption>Pull Request generated autonomously by the redbrogdon-antigravity bot</figcaption>
+          </figure>
+
+          <h2>The Workflow: Before and After</h2>
+
+          <p><strong>The old way:</strong></p>
+          <ol>
+            <li>Somehow remember that an article was published last week.</li>
+            <li>Manually update the site's content and push a commit.</li>
+          </ol>
+
+          <p><strong>The new way:</strong></p>
+          <ol>
+            <li>An article goes live on <code>blog.flutter.dev</code> or <code>dart.dev/blog</code>.</li>
+            <li>On its next scheduled run, the Antigravity sidecar executes, detects the post, and queries the model for a custom blurb.</li>
+            <li>A ready-to-merge PR arrives in my GitHub notifications from <code>redbrogdon-antigravity[bot]</code>.</li>
+            <li>I review the diff on my phone or laptop, hit <strong>Merge</strong>, and the site deploys.</li>
+          </ol>
+
+          <h2>Some Additional Lessons Learned</h2>
+
+          <ol>
+            <li><strong>Constrain the Agency</strong>: Don't let an agent guess at git commands or remote URLs. Hardcode your business rules—like capping branch names to &le; 25 characters (<code>bot/blog-&lt;slug&gt;</code>) or checking if an open PR already exists—directly into your execution script.</li>
+            <li><strong>Sidecars Are Just Clean Unix Processes</strong>: There’s no proprietary runtime lock-in. An Antigravity sidecar is simply a process you define in <code>sidecar.json</code>. You can write it in Python, Dart, Go, Node, or Bash.</li>
+            <li><strong>Log for Asynchronous Peace of Mind</strong>: Because background sidecars run while you're focused on writing code in the foreground, always add a rotating log file (<code>watcher.log</code>). Being able to glance at a local log file and see exactly when the last cycle ran and what it found gives you total confidence in your background helpers.</li>
+          </ol>
+
+          <h2>What Will You Automate?</h2>
+
+          <p>
+            My next task for this sidecar is figuring out how to check YouTube and other sources for media appearances, podcasts, and talks so my media page stays just as effortlessly current.
+          </p>
+
+          <p>
+            Which brings me to you: what's your next step going to be?
+          </p>
+
+          <p>
+            Sidecars aren't just for monitoring RSS feeds—you can build one for almost any background task you'd rather not do by hand. If you're looking for a place to start, here are a few ideas worth building:
+          </p>
+
+          <ul>
+            <li><strong>Dependency Drift Watcher</strong>: Periodically run <code>dart pub outdated</code>, have an LLM scan the changelogs for breaking changes, and open a summary issue or PR for safe minor updates.</li>
+            <li><strong>API Contract Drift Detector</strong>: Poll your backend's OpenAPI or GraphQL schema and automatically open a PR updating client bindings before breaking changes hit staging.</li>
+            <li><strong>Continuous Docstring &amp; Sample Validator</strong>: Run a quiet background linter across modified files to ensure public API classes have up-to-date doc comments and compile-tested code snippets.</li>
+          </ul>
+
+          <p>
+            If you have developer maintenance tasks you keep forgetting to do, turn them into a sidecar.
+          </p>
+
+          <h3>Next Steps &amp; Resources</h3>
+          <ul>
+            <li><strong>Download Antigravity</strong>: Explore <a href="https://antigravity.google" target="_blank" rel="noopener">Google Antigravity</a> and the modern AI developer platform.</li>
+            <li><strong>Sidecars Documentation</strong>: Read the official <a href="https://antigravity.google/docs/sidecars" target="_blank" rel="noopener">Antigravity Sidecars Guide</a> to learn about lifecycle hooks, restart policies, and discovery locations.</li>
+            <li><strong>Inspect the Code</strong>: Browse the complete implementation in the <a href="https://github.com/redbrogdon/redbrogdon-dev" target="_blank" rel="noopener">redbrogdon-dev repository</a>.</li>
+          </ul>
+        </div>
+
+      </article>
+    </main>
+
+  </div>
+</body>
+
+</html>
