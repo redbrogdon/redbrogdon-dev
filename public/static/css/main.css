@@ -27,6 +27,7 @@
 :root {
   color-scheme: light dark;
   --bg: #fbf9f4;
+  --bg-cell: #f7f5ef;
   --text: #1c1917;
   --muted: #78716c;
   --link: #991b1b;
@@ -42,6 +43,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #151413;
+    --bg-cell: #1d1b19;
     --text: #ede7dc;
     --muted: #9d9588;
     --link: #d99b43;
@@ -59,11 +61,12 @@
 }
 
 html {
+  background-color: var(--bg);
   scroll-behavior: smooth;
 }
 
 body {
-  background: var(--bg);
+  background-color: transparent;
   color: var(--text);
   font-family: var(--font-serif);
   font-size: 1.18rem;
@@ -71,6 +74,16 @@ body {
   padding: 3.5rem 2rem 5rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#game-of-life-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
 }
 
 a {
