@@ -195,7 +195,7 @@
             To register a sidecar with Antigravity, you just create a directory inside <code>.agents/sidecars/</code> (for project-scoped sidecars) or <code>~/.gemini/config/sidecars/</code> (for machine-wide sidecars). Inside, drop a <code>sidecar.json</code> file:
           </p>
 
-          <pre><code>{
+          <pre><code class="language-json">{
   "description": "Monitors blog.flutter.dev and dart.dev/blog for new articles and opens PRs via Gemini",
   "builtin": "schedule",
   "args": [
@@ -223,7 +223,7 @@
             To activate your sidecar, you explicitly opt in by adding it to your global configuration file (<code>~/.gemini/config/config.json</code>):
           </p>
 
-          <pre><code>{
+          <pre><code class="language-json">{
   "sidecars": {
     "blog-watcher": {
       "enabled": true
@@ -241,7 +241,7 @@
             The core loop in Python is straightforward. Every six hours, it pulls the Atom feeds for the designated developer blogs:
           </p>
 
-          <pre><code># Monitored feeds
+          <pre><code class="language-python"># Monitored feeds
 FEEDS = [
     {"name": "Flutter Blog", "url": "https://blog.flutter.dev/feed.xml"},
     {"name": "Dart Blog", "url": "https://dart.dev/blog/feed.xml"},
@@ -260,7 +260,7 @@ FEEDS = [
             That second check is crucial for any background bot:
           </p>
 
-          <pre><code>def is_branch_or_pr_pending(repo_root: Path, branch: str) -&gt; bool:
+          <pre><code class="language-python">def is_branch_or_pr_pending(repo_root: Path, branch: str) -&gt; bool:
     """Avoid re-running or spamming GitHub if a PR is already in review."""
     pr_check = subprocess.run(
         ["gh", "pr", "list", "--state", "open", "--json", "headRefName"],
@@ -297,7 +297,7 @@ FEEDS = [
             Using the Google GenAI SDK, I hand the model the article's raw text along with explicit style constraints:
           </p>
 
-          <pre><code>from google import genai
+          <pre><code class="language-python">from google import genai
 
 client = genai.Client()
 
@@ -337,7 +337,7 @@ response = client.models.generate_content(
             Rather than relying on brittle personal access tokens (PATs), you can configure the sidecar to <a href="https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation" target="_blank" rel="noopener">authenticate as a GitHub App installation</a>. This approach gives you the ability to strictly limit what the bot is allowed to do on GitHub (for instance, granting write access only to contents and pull requests while keeping everything else locked down), in addition to providing fine-grained repository permissions and short-lived access tokens:
           </p>
 
-          <pre><code>import jwt  # PyJWT
+          <pre><code class="language-python">import jwt  # PyJWT
 
 # 1. Sign a 10-minute JWT using RS256 and the App's private key
 now = int(time.time())
@@ -356,7 +356,7 @@ jwt_token = jwt.encode(payload, private_key_pem, algorithm="RS256")
             When creating the branch and commit, we configure Git's environment variables to reflect the bot:
           </p>
 
-          <pre><code>GIT_AUTHOR_NAME="redbrogdon-antigravity[bot]"
+          <pre><code class="language-bash">GIT_AUTHOR_NAME="redbrogdon-antigravity[bot]"
 GIT_AUTHOR_EMAIL="&lt;app-id&gt;+redbrogdon-antigravity[bot]@users.noreply.github.com"</code></pre>
 
           <p>
@@ -432,6 +432,8 @@ GIT_AUTHOR_EMAIL="&lt;app-id&gt;+redbrogdon-antigravity[bot]@users.noreply.githu
     </main>
 
   </div>
+  <!-- Syntax Highlighting (Synchronous parser-blocking to guarantee zero FOUC) -->
+  <script src="/static/js/prism.min.js"></script>
 </body>
 
 </html>
