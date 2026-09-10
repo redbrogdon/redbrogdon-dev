@@ -16,22 +16,6 @@
   </item>
 
   <item>
-    <title>Some Options for Deserializing JSON with Flutter</title>
-    <link>https://flutter.dev/blog/some-options-for-deserializing-json-with-flutter</link>
-    <guid>https://flutter.dev/blog/some-options-for-deserializing-json-with-flutter</guid>
-    <pubDate>Thu, 02 Aug 2018 00:00:00 GMT</pubDate>
-    <description>A comparative study of JSON deserialization strategies in Flutter, weighing hand-rolled parsing against automated code generation. Explores how to balance type safety, ergonomics, and maintenance overhead across projects of varying scale.</description>
-  </item>
-
-  <item>
-    <title>Architects, testers, and coders: Building multi-agent development teams</title>
-    <link>https://flutter.dev/blog/building-multi-agent-dev-teams</link>
-    <guid>https://flutter.dev/blog/building-multi-agent-dev-teams</guid>
-    <pubDate>Thu, 20 Aug 2026 00:00:00 GMT</pubDate>
-    <description>An examination of how coordinated multi-agent teams in Google Antigravity can translate Python libraries into idiomatic Dart packages. Explores a disciplined, test-driven development workflow that divides labor across architect, coder, and tester roles.</description>
-  </item>
-
-  <item>
     <title>The Future of Flutter Design Libraries with Widgetbook</title>
     <link>https://www.youtube.com/watch?v=sWSXWrrqOAY</link>
     <guid>https://www.youtube.com/watch?v=sWSXWrrqOAY</guid>
@@ -45,6 +29,14 @@
     <guid>https://flutter.dev/blog/a2ui-client-side-functions</guid>
     <pubDate>Fri, 28 Aug 2026 00:00:00 GMT</pubDate>
     <description>Learn how client-side functions allow an agent to delegate local operations directly to Dart code running on a user&apos;s device.</description>
+  </item>
+
+  <item>
+    <title>Architects, testers, and coders: Building multi-agent development teams</title>
+    <link>https://flutter.dev/blog/building-multi-agent-dev-teams</link>
+    <guid>https://flutter.dev/blog/building-multi-agent-dev-teams</guid>
+    <pubDate>Thu, 20 Aug 2026 00:00:00 GMT</pubDate>
+    <description>An examination of how coordinated multi-agent teams in Google Antigravity can translate Python libraries into idiomatic Dart packages. Explores a disciplined, test-driven development workflow that divides labor across architect, coder, and tester roles.</description>
   </item>
 
   <item>
@@ -189,6 +181,14 @@
     <guid>https://blog.codepen.io/2020/04/22/265-flutter/</guid>
     <pubDate>Wed, 22 Apr 2020 00:00:00 GMT</pubDate>
     <description>Joining Chris Coyier and Alex Vazquez to explore embedding Flutter compilation and live web runtimes into CodePen.</description>
+  </item>
+
+  <item>
+    <title>Some Options for Deserializing JSON with Flutter</title>
+    <link>https://flutter.dev/blog/some-options-for-deserializing-json-with-flutter</link>
+    <guid>https://flutter.dev/blog/some-options-for-deserializing-json-with-flutter</guid>
+    <pubDate>Thu, 02 Aug 2018 00:00:00 GMT</pubDate>
+    <description>A comparative study of JSON deserialization strategies in Flutter, weighing hand-rolled parsing against automated code generation. Explores how to balance type safety, ergonomics, and maintenance overhead across projects of varying scale.</description>
   </item>
 </channel>
 </rss>
