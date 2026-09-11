@@ -25,10 +25,11 @@ These rules apply to all AI assistants and coding agents working within this wor
 
 ### Content Synchronization (Mandatory Checklist)
 Whenever new content (a blog post, poem, video, talk, or podcast appearance) is created or published:
-- [ ] Add the content file (for internal posts/poems).
+- [ ] Add the content file (for internal posts/poems) with `<link rel="canonical" href="...">`.
+- [ ] For blog posts, include `article:published_time`, `article:modified_time`, `article:author`, and `BlogPosting` JSON-LD schema.
 - [ ] Update the relevant section index ([`public/blog/index.html`](public/blog/index.html) or [`public/media/index.html`](public/media/index.html)).
 - [ ] Prepend a new `<item>` entry to the RSS feed ([`public/feed.xml`](public/feed.xml)).
-- [ ] Add the canonical `<url>` to the sitemap ([`public/sitemap.xml`](public/sitemap.xml)).
+- [ ] Add or update the canonical `<url>` and `<lastmod>` in the sitemap ([`public/sitemap.xml`](public/sitemap.xml)).
 - [ ] **Chronological Rule**: Both section indexes and the RSS feed must strictly be sorted in **descending chronological order** (newest first).
 
 ### Self-Hosting & Zero CDNs

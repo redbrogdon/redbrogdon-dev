@@ -25,6 +25,7 @@
   <link rel="icon" sizes="512x512" href="/static/icon/favicon-512x512.png" type="image/png" />
   <link rel="alternate" type="application/rss+xml" title="Andrew Brogdon · Blog &amp; Media Feed" href="/feed.xml" />
   <link rel="author" href="/humans.txt" />
+  <link rel="canonical" href="https://redbrogdon.dev/" />
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
@@ -68,6 +69,41 @@
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-K7H22E9BGS');
+  </script>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://redbrogdon.dev/#website",
+        "url": "https://redbrogdon.dev/",
+        "name": "Andrew Brogdon",
+        "description": "Andrew Brogdon is a staff engineer at Google focused on agentic applications, generative UI across platforms, and the A2UI protocol."
+      },
+      {
+        "@type": "Person",
+        "@id": "https://redbrogdon.dev/#person",
+        "name": "Andrew Brogdon",
+        "url": "https://redbrogdon.dev/",
+        "image": "https://redbrogdon.dev/static/images/headshot.png",
+        "jobTitle": "Staff Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Google",
+          "url": "https://about.google/"
+        },
+        "sameAs": [
+          "https://github.com/redbrogdon",
+          "https://bsky.app/profile/redbrogdon.dev",
+          "https://linkedin.com/in/redbrogdon",
+          "https://x.com/redbrogdon"
+        ]
+      }
+    ]
+  }
   </script>
 </head>
 

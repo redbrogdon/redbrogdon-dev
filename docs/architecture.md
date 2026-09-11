@@ -12,12 +12,13 @@ This document defines the architectural standards, design specifications, and co
    - Never link to external CDNs (e.g., cdnjs, unpkg, Google Fonts).
 
 2. **Mandatory Content Synchronization**
-   - Whenever any new content (blog post, poem, talk, podcast, or appearance) is added to the site:
-     1. Create or update the content page or entry.
-     2. Update the corresponding section index (`public/blog/index.html` or `public/media/index.html`).
-     3. Prepend a new `<item>` entry to the RSS feed (`public/feed.xml`).
-     4. Add or update the canonical `<url>` entry in the sitemap (`public/sitemap.xml`).
-   - **Chronological Rule**: Both section indexes and the RSS feed must strictly maintain **descending chronological order** (newest content first).
+    - Whenever any new content (blog post, poem, talk, podcast, or appearance) is added to the site:
+      1. Create or update the content page or entry with `<link rel="canonical" href="...">`.
+      2. For blog posts, include `article:published_time`, `article:modified_time`, `article:author`, and `BlogPosting` JSON-LD schema.
+      3. Update the corresponding section index (`public/blog/index.html` or `public/media/index.html`).
+      4. Prepend a new `<item>` entry to the RSS feed (`public/feed.xml`).
+      5. Add or update the canonical `<url>` entry in the sitemap (`public/sitemap.xml`) including `<lastmod>`.
+    - **Chronological Rule**: Both section indexes and the RSS feed must strictly maintain **descending chronological order** (newest content first).
 
 3. **Layout Stability (Zero Jitter)**
    - Centered layouts (`margin: 0 auto`) shift horizontally when navigating between short pages without scrollbars (e.g., Home, Poetry) and long pages with scrollbars (e.g., Blog, Media).
@@ -107,7 +108,24 @@ The sidebar navigation and social links are uniform across all pages:
 
 ---
 
-## 5. Background Automation (Sidecars)
+## 5. SEO, Structured Data & Analytics
+
+1. **Canonical URLs**
+   - Every valid page must declare `<link rel="canonical" href="https://redbrogdon.dev/...">` in `<head>`.
+   - The 404 page omits a canonical link and includes `<meta name="robots" content="noindex, nofollow">`.
+2. **Schema.org Structured Data (JSON-LD)**
+   - Homepage (`/`): `WebSite` and `Person` schema with `sameAs` entity links.
+   - Section Indexes (`/blog/`, `/media/`, `/poetry/`): `CollectionPage` schema with author attribution.
+   - Blog Posts (`/blog/*.html`): `BlogPosting` schema with headline, dates, author, and featured image.
+   - Poems (`/poetry/*.html`): `CreativeWork` schema with title, author, and description.
+3. **Article Open Graph Tags**
+   - Blog posts must specify `article:published_time`, `article:modified_time`, and `article:author`.
+4. **Google Analytics (GA4)**
+   - `G-K7H22E9BGS` must be included asynchronously in `<head>` on all 11 pages (including the 404 error page).
+
+---
+
+## 6. Background Automation (Sidecars)
 
 Background automation runs via Google Antigravity managed sidecars:
 - Located under `.agents/sidecars/` (e.g. `blog-watcher`).
