@@ -122,7 +122,7 @@
 
         <div class="article-body">
           <p>
-            Let's be honest: I have done some real things in software over the course of my career, but I'm not one of the big name folks with a closet full of tailored T-shirts and a long line of keynote speaking invitations.
+            While I have done some real things in software over the course of my career, I'm definitely not one of the big name folks with a closet full of tailored T-shirts and a long line of keynote speaking invitations.
           </p>
 
           <p>
@@ -130,7 +130,7 @@
           </p>
 
           <p>
-            And because I have this site, it is obviously of utmost, earth-shattering importance that my readers get immediate updates the second I publish anything new. Over the years, I've written deep dives and architectural essays across the official Flutter and Dart publications. In theory, whenever an article goes live, I should immediately open my site repo, format a new entry for <code>public/blog/index.html</code>, write a brief editorial blurb that matches my site’s tone, update the RSS feed, push a branch, and open a pull request.
+            Because I have one, it is obviously of utmost, earth-shattering importance that my readers get immediate updates the second I publish anything new. Over the years, I've written deep dives and architectural essays across the official Flutter and Dart publications. In theory, whenever an article goes live, I should immediately open my site repo, format a new entry for <code>public/blog/index.html</code>, write a brief editorial blurb that matches my site’s tone, update the RSS feed, push a branch, and open a pull request.
           </p>
 
           <p>
@@ -138,7 +138,7 @@
           </p>
 
           <p>
-            When Google Antigravity introduced <strong>Sidecars</strong>—managed background processes that run alongside your development environment—I realized they could help me keep things up to date without relying on my proven-to-be-underwhelming ability to remember details. By the time I was done, I had learned a thing or two that seemed worth sharing.
+            When Google Antigravity introduced Sidecars—managed background processes that run alongside your development environment—I realized they could help me keep things up to date without relying on my proven-to-be-underwhelming ability to remember details. By the time I was done, I had learned a thing or two that seemed worth sharing.
           </p>
 
           <h2>What Exactly Is an Antigravity Sidecar?</h2>
@@ -181,7 +181,10 @@
           </p>
 
           <figure>
-            <img src="/static/images/blog/sidecar-architecture.png" alt="Antigravity Sidecar Pipeline: Deterministic vs. Agentic Workflow" width="800" height="512">
+            <picture>
+              <source srcset="/static/images/blog/sidecar-architecture-dark.svg" media="(prefers-color-scheme: dark)">
+              <img src="/static/images/blog/sidecar-architecture-light.svg" alt="Antigravity Sidecar Pipeline: Deterministic vs. Agentic Workflow" width="720" height="460">
+            </picture>
             <figcaption>Antigravity Sidecar Pipeline: Deterministic plumbing vs. Agentic synthesis</figcaption>
           </figure>
 
@@ -210,7 +213,7 @@
 }</code></pre>
 
           <p>
-            Instead of running a persistent daemon that idly eats memory between runs, Antigravity’s built-in scheduler acts as the cron manager. Because the sidecar’s directory acts as its working directory, Antigravity triggers <code>python3 watch.py --once</code> directly inside the sidecar folder every six hours, lets it perform the scan and open any needed PRs, and then terminates cleanly.
+            Instead of running a persistent daemon that idly eats memory between runs, Antigravity’s built-in scheduler acts as the cron manager. Antigravity triggers <code>python3 watch.py --once</code> directly inside the sidecar folder every six hours, lets it perform the scan and open any needed PRs, and then terminates cleanly.
           </p>
 
           <h3>Security by Default: Explicit Activation</h3>
@@ -290,7 +293,7 @@ FEEDS = [
           </p>
 
           <p>
-            Obviously, I have my own stylistic flair that demands new, customized summaries! On my website, blog entries don't just use the raw marketing teaser from the feed; they have short, tailored summaries that frame what the post is about. Writing those summaries is creative work—the exact kind of task where modern models excel.
+            Obviously, I have my own stylistic flair that demands new, customized summaries! On my website, blog entries don't use the raw marketing teaser from the feed; they have short, tailored summaries that frame what the post is about. Writing those summaries is text-based, generative work—the exact kind of task where modern models excel.
           </p>
 
           <p>
@@ -353,14 +356,14 @@ jwt_token = jwt.encode(payload, private_key_pem, algorithm="RS256")
 # -&gt; Returns an installation token starting with ghs_...</code></pre>
 
           <p>
-            When creating the branch and commit, we configure Git's environment variables to reflect the bot:
+            When creating the branch and commit, the script configures Git's environment variables to reflect the bot:
           </p>
 
           <pre><code class="language-bash">GIT_AUTHOR_NAME="redbrogdon-antigravity[bot]"
 GIT_AUTHOR_EMAIL="&lt;app-id&gt;+redbrogdon-antigravity[bot]@users.noreply.github.com"</code></pre>
 
           <p>
-            And when pushing over HTTPS, Git authenticates using <code>x-access-token:{token}</code>.
+            When pushing over HTTPS, Git authenticates using <code>x-access-token:{token}</code>.
           </p>
 
           <p>
@@ -372,23 +375,11 @@ GIT_AUTHOR_EMAIL="&lt;app-id&gt;+redbrogdon-antigravity[bot]@users.noreply.githu
             <figcaption>Pull Request generated autonomously by the redbrogdon-antigravity bot</figcaption>
           </figure>
 
-          <h2>The Workflow: Before and After</h2>
+          <h2>Conclusions and Some Additional Lessons Learned</h2>
 
-          <p><strong>The old way:</strong></p>
-          <ol>
-            <li>Somehow remember that an article was published last week.</li>
-            <li>Manually update the site's content and push a commit.</li>
-          </ol>
-
-          <p><strong>The new way:</strong></p>
-          <ol>
-            <li>An article goes live on <code>blog.flutter.dev</code> or <code>dart.dev/blog</code>.</li>
-            <li>On its next scheduled run, the Antigravity sidecar executes, detects the post, and queries the model for a custom blurb.</li>
-            <li>A ready-to-merge PR arrives in my GitHub notifications from <code>redbrogdon-antigravity[bot]</code>.</li>
-            <li>I review the diff on my phone or laptop, hit <strong>Merge</strong>, and the site deploys.</li>
-          </ol>
-
-          <h2>Some Additional Lessons Learned</h2>
+          <p>
+            Will all those steps done, I've got a working sidecar that helps keep my site up to date! In addition to the stuff described above, I learned a few other best practices along the way:
+          </p>
 
           <ol>
             <li><strong>Constrain the Agency</strong>: Don't let an agent guess at git commands or remote URLs. Hardcode your business rules—like capping branch names to &le; 25 characters (<code>bot/blog-&lt;slug&gt;</code>) or checking if an open PR already exists—directly into your execution script.</li>

@@ -88,8 +88,21 @@ The sidebar navigation and social links are uniform across all pages:
    - Every page must specify `og:image`, `og:image:width: 1200`, `og:image:height: 630`, and `twitter:card: summary_large_image`.
    - General site pages point to `/static/images/og-card.png`.
    - Blog posts point to their tailored 1200×630 header card.
-3. **Embedded Screenshots & Diagrams**
-   - Must be stored as PNG under `public/static/images/blog/`.
+3. **Diagrams & Visual Schematics**
+   - Architecture, flow, and sequence diagrams must be created as vector SVGs adhering to the Monograph & Broadside design system using `.agents/skills/generate-broadside-diagram/scripts/generate_diagram.py`.
+   - Dual variants must be generated: `<slug>-light.svg` (warm paper `#fbf9f4`, card `#f4f1ea`, terracotta `#991b1b` accents) and `<slug>-dark.svg` (obsidian `#151413`, card `#1e1b19`, warm amber `#d99b43` accents).
+   - Embed within `<figure>` using `<picture>` for dynamic theme switching:
+     ```html
+     <figure>
+       <picture>
+         <source srcset="/static/images/blog/<slug>-dark.svg" media="(prefers-color-scheme: dark)">
+         <img src="/static/images/blog/<slug>-light.svg" alt="..." width="720" height="460">
+       </picture>
+       <figcaption>...</figcaption>
+     </figure>
+     ```
+4. **Embedded Screenshots & Raster Media**
+   - Stored as PNG under `public/static/images/blog/`.
    - Bounded with `max-width: 100%; border-radius: 6px; border: 1px solid var(--border);` inside `<figure>` with `<figcaption>`.
 
 ---
