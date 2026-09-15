@@ -1,5 +1,5 @@
 {
-  "description": "Monitors blog.flutter.dev and dart.dev/blog for new articles by Andrew Brogdon and opens PRs via Gemini",
+  "description": "Monitors blog.flutter.dev, dart.dev/blog, and the Flutter YouTube channel for new content by Andrew Brogdon and opens PRs via Gemini",
   "builtin": "schedule",
   "args": [
     "0 */6 * * *",

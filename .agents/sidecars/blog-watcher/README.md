@@ -1,17 +1,19 @@
-# Antigravity Blog Watcher & Auto-PR Sidecar
+# Antigravity Content Watcher & Auto-PR Sidecar
 
-An automated Antigravity sidecar and agent that monitors official Flutter and Dart publications for articles written by Andrew Brogdon.
+An automated Antigravity sidecar and agent that monitors official Flutter and Dart publications as well as the official Flutter YouTube channel for new content created by or featuring Andrew Brogdon.
 
-When a new article is detected:
+When new content is detected:
 1. Generates an editorial summary matching the literary tone of `redbrogdon.dev` using **Gemini 3.8** (`gemini-3.8-flash`).
-2. Creates an isolated git branch (`bot/blog-<slug>`, max 25 chars).
-3. Adds the entry to `public/blog/index.html` and `public/feed.xml`.
-4. Commits the changes conforming to the repository's commit workflow.
-5. Pushes the branch and opens a GitHub Pull Request via `gh pr create`.
+2. Creates an isolated git branch (`bot/blog-<slug>` or `bot/media-<slug>`, max 25 chars).
+3. Adds the entry to `public/blog/index.html` or `public/media/index.html` and `public/feed.xml`.
+4. Updates `<lastmod>` in `public/sitemap.xml` where applicable.
+5. Commits the changes conforming to the repository's commit workflow.
+6. Pushes the branch and opens a GitHub Pull Request via `gh pr create`.
 
-## Monitored Feeds
+## Monitored Sources
 - **Flutter Blog:** `https://blog.flutter.dev/feed.xml`
 - **Dart Blog:** `https://dart.dev/blog/feed.xml`
+- **Flutter YouTube Channel:** `https://www.youtube.com/@flutterdev/videos` (with fallback between YouTube Atom RSS and direct channel data parsing)
 
 *(Medium feeds and other external sources are ignored per configuration).*
 
@@ -19,7 +21,14 @@ When a new article is detected:
 
 ### 1. Dry Run (Test Detection & Summarization without Git/PR changes)
 ```bash
+# Check all sources
 python3 .agents/sidecars/blog-watcher/watch.py --dry-run
+
+# Check only media (YouTube)
+python3 .agents/sidecars/blog-watcher/watch.py --dry-run --type media
+
+# Check only blog articles
+python3 .agents/sidecars/blog-watcher/watch.py --dry-run --type blog
 ```
 
 ### 2. Single Run (Run once and exit)
@@ -36,7 +45,7 @@ python3 .agents/sidecars/blog-watcher/watch.py --interval 21600
 The sidecar is registered via `sidecar.json`:
 ```json
 {
-  "description": "Monitors blog.flutter.dev and dart.dev/blog for new articles by Andrew Brogdon and opens PRs via Gemini",
+  "description": "Monitors blog.flutter.dev, dart.dev/blog, and the Flutter YouTube channel for new content by Andrew Brogdon and opens PRs via Gemini",
   "builtin": "schedule",
   "args": [
     "0 */6 * * *",
@@ -45,6 +54,7 @@ The sidecar is registered via `sidecar.json`:
     "--once"
   ],
   "env": {
+    "PATH": "/Library/Frameworks/Python.framework/Versions/3.14/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin",
     "GEMINI_MODEL": "gemini-3.8-flash"
   }
 }

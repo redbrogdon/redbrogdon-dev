@@ -129,7 +129,10 @@ The sidebar navigation and social links are uniform across all pages:
 
 Background automation runs via Google Antigravity managed sidecars:
 - Located under `.agents/sidecars/` (e.g. `blog-watcher`).
+- **Multi-Source Coverage**:
+  - **Blog Articles**: Monitors `blog.flutter.dev` and `dart.dev/blog` for articles authored by Andrew Brogdon, updating `public/blog/index.html` and `public/feed.xml`.
+  - **YouTube Media**: Monitors the official Flutter YouTube channel (`@flutterdev`) using resilient dual-mode fetching (Atom RSS with fallback to `ytInitialData`), detecting videos featuring Andrew Brogdon and updating `public/media/index.html`, `public/feed.xml`, and `public/sitemap.xml`.
 - **Architectural Division**:
-  - **Deterministic Plumbing**: Python scripts handle feed fetching, diff checking, branch name validation, git commits, rotating logs (`watcher.log`), and GitHub App RS256 JWT minting.
-  - **Agentic Synthesis**: Gemini (`gemini-3.8-flash`) synthesizes tailored, 1-2 sentence editorial summaries and pull request descriptions matching the site\'s voice.
+  - **Deterministic Plumbing**: Python scripts handle feed fetching, fallback HTML scraping, diff checking, branch name validation (`bot/blog-*` and `bot/media-*` <= 25 chars), git commits, rotating logs (`watcher.log`), and GitHub App RS256 JWT minting.
+  - **Agentic Synthesis**: Gemini (`gemini-3.8-flash`) synthesizes tailored title refinements, 1-2 sentence editorial summaries in the monograph voice, and pull request descriptions.
 - **Safety**: Sidecars must run on scheduled cron intervals (`0 */6 * * *`) via `"builtin": "schedule"` in `sidecar.json`, avoiding persistent daemon memory overhead.
