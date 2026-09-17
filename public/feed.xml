@@ -8,6 +8,14 @@
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
 
   <item>
+    <title>Flutter in the AI Era with Eric Seidel</title>
+    <link>https://www.youtube.com/watch?v=8OUcGUiKj8M</link>
+    <guid>https://www.youtube.com/watch?v=8OUcGUiKj8M</guid>
+    <pubDate>Wed, 16 Sep 2026 09:02:00 GMT</pubDate>
+    <description>Catching up with Flutter co-founder and Shorebird founder Eric Seidel live at Fluttercon USA to discuss code push, AI agents, enterprise adoption, and why engineering fundamentals matter more than ever in the age of generative AI.</description>
+  </item>
+
+  <item>
     <title>Enabling My Vanity with Antigravity Sidecars</title>
     <link>https://redbrogdon.dev/blog/enabling-my-vanity-with-antigravity-sidecars.html</link>
     <guid>https://redbrogdon.dev/blog/enabling-my-vanity-with-antigravity-sidecars.html</guid>
