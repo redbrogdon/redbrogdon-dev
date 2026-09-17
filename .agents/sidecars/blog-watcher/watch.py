@@ -404,7 +404,9 @@ def create_pr_for_article(repo_root: Path, article: dict, blurb_data: dict, dry_
     branch = generate_branch_name(article["url"], article["title"])
     title = article["title"]
     desc = blurb_data["description"]
-    pr_body = blurb_data.get("pr_summary", f"Adds new blog post: {title}\n\n{desc}\n\nURL: {article['url']}")
+    pr_body = blurb_data.get("pr_summary", f"Adds new blog post: {title}\n\n{desc}")
+    if article.get("url") and article["url"] not in pr_body:
+        pr_body = f"{pr_body.strip()}\n\nURL: {article['url']}"
 
     month_year, rfc822_date = format_pub_date(article["pub_date_str"])
 
@@ -779,12 +781,21 @@ Respond ONLY with valid JSON in this format:
         }
 
 
-def generate_media_branch_name(url: str, title: str) -> str:
+def generate_media_branch_name(url: str, title: str = "") -> str:
     """Generate a git branch name guaranteed to be <= 25 characters total."""
     prefix = "bot/media-"
-    clean_title = re.sub(r"[^a-zA-Z0-9]+", "-", title).strip("-").lower()
+    # Extract YouTube video ID or URL slug if present (e.g. watch?v=8OUcGUiKj8M or youtu.be/8OUcGUiKj8M)
+    vid_match = re.search(r"(?:v=|youtu\.be/|/embed/|/v/)([a-zA-Z0-9_-]{6,})", url)
+    if vid_match:
+        slug = vid_match.group(1).lower()
+    else:
+        slug = url.rstrip("/").split("/")[-1].split("?")[0]
+        if not slug or len(slug) < 3:
+            slug = title
+
+    clean_slug = re.sub(r"[^a-zA-Z0-9]+", "-", slug).strip("-").lower()
     # 25 max - 10 prefix = 15 chars max for slug
-    truncated_slug = clean_title[:15].rstrip("-")
+    truncated_slug = clean_slug[:15].rstrip("-")
     branch = f"{prefix}{truncated_slug}"
     assert len(branch) <= 25, f"Branch name {branch} exceeds 25 chars"
     return branch
@@ -836,9 +847,12 @@ def update_sitemap_media_lastmod(repo_root: Path):
 def create_pr_for_video(repo_root: Path, video: dict, blurb_data: dict, dry_run: bool = False):
     """Create a git branch, commit changes, and open a GitHub PR for a new video."""
     title = blurb_data.get("title") or video.get("title") or "Untitled Video"
-    branch = generate_media_branch_name(video["url"], title)
+    clean_fallback = clean_video_title(video.get("title", ""))
+    branch = generate_media_branch_name(video["url"], clean_fallback)
     desc = blurb_data["description"]
-    pr_body = blurb_data.get("pr_summary", f"Adds new video: {title}\n\n{desc}\n\nURL: {video['url']}")
+    pr_body = blurb_data.get("pr_summary", f"Adds new video: {title}\n\n{desc}")
+    if video.get("url") and video["url"] not in pr_body:
+        pr_body = f"{pr_body.strip()}\n\nURL: {video['url']}"
 
     month_year, rfc822_date = format_pub_date(video.get("pub_date_str", ""))
 
@@ -955,8 +969,8 @@ def update_rss_feed(repo_root: Path, item: dict, description: str, rfc822_date: 
         logger.error("Could not find atom:link tag in public/feed.xml")
 
 
-def is_branch_or_pr_pending(repo_root: Path, branch: str) -> bool:
-    """Check if an open GitHub PR already exists for this branch."""
+def is_branch_or_pr_pending(repo_root: Path, branch: str, item_url: str = None, item_id: str = None) -> bool:
+    """Check if an open GitHub PR already exists for this branch, item URL, or ID."""
     try:
         if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
             app_auth = get_github_app_auth(repo_root)
@@ -965,7 +979,7 @@ def is_branch_or_pr_pending(repo_root: Path, branch: str) -> bool:
                 os.environ["GITHUB_TOKEN"] = app_auth[0]
 
         pr_check = subprocess.run(
-            ["gh", "pr", "list", "--state", "open", "--json", "headRefName"],
+            ["gh", "pr", "list", "--state", "open", "--json", "headRefName,title,body"],
             cwd=repo_root,
             capture_output=True,
             text=True,
@@ -973,7 +987,26 @@ def is_branch_or_pr_pending(repo_root: Path, branch: str) -> bool:
         )
         if pr_check.returncode == 0 and pr_check.stdout.strip():
             prs = json.loads(pr_check.stdout)
-            if any(p.get("headRefName") == branch for p in prs):
+            for p in prs:
+                head_ref = p.get("headRefName", "")
+                if head_ref == branch:
+                    return True
+                body = p.get("body", "")
+                title = p.get("title", "")
+                if item_url and (item_url in body or item_url in title):
+                    return True
+                if item_id and (item_id in body or item_id in title or item_id.lower() in head_ref.lower()):
+                    return True
+        elif pr_check.returncode != 0:
+            # Fallback when gh CLI or GitHub API is offline: check local git branches
+            local_check = subprocess.run(
+                ["git", "branch", "--list", branch],
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+            )
+            if local_check.returncode == 0 and branch in local_check.stdout:
+                logger.info(f"Local branch {branch} found (fallback PR check).")
                 return True
     except Exception as e:
         logger.debug(f"Error checking open PRs: {e}")
@@ -1024,7 +1057,7 @@ def run_blog_cycle(repo_root: Path, model_name: str, dry_run: bool = False, slug
     logger.info(f"Processing {len(new_articles)} new article(s)...")
     for art in new_articles:
         branch = generate_branch_name(art["url"], art["title"])
-        if is_branch_or_pr_pending(repo_root, branch):
+        if is_branch_or_pr_pending(repo_root, branch, item_url=art["url"]):
             logger.info(f"Pending branch or PR already exists for '{art['title']}' ({branch}). Waiting for merge.")
             continue
 
@@ -1076,7 +1109,7 @@ def run_media_cycle(repo_root: Path, model_name: str, dry_run: bool = False, slu
     for vid in candidates_to_process:
         clean_title = clean_video_title(vid["title"])
         branch = generate_media_branch_name(vid["url"], clean_title)
-        if is_branch_or_pr_pending(repo_root, branch):
+        if is_branch_or_pr_pending(repo_root, branch, item_url=vid["url"], item_id=vid.get("id")):
             logger.info(f"Pending branch or PR already exists for '{clean_title}' ({branch}). Waiting for merge.")
             continue
 
