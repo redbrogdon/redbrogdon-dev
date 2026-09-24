@@ -45,7 +45,7 @@ Whenever new content (a blog post, poem, video, talk, or podcast appearance) is 
 - Tag snippets with `<pre><code class="language-{python|json|bash}">...</code></pre>`. Plain text and directory trees omit language classes.
 
 ### Blog Headers & Social Cards
-- Blog header cards must be generated via `.agents/skills/generate-blog-header/` at 1200×630 PNG.
+- Visual assets and blog header cards must be generated via `.agents/skills/generate-site-visuals/` (see ADR-007 & ADR-008).
 - On article pages, use `<picture>` with **inverted contrast**:
   - Light mode displays `-dark.png`.
   - Dark mode (`prefers-color-scheme: dark`) displays `-light.png`.

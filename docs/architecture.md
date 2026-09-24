@@ -75,23 +75,31 @@ The sidebar navigation and social links are uniform across all pages:
 
 ---
 
-## 4. Media & Social Assets
+## 4. Media, Social Assets & Site Visuals
 
-1. **Blog Header Images**
-   - Generated via `.agents/skills/generate-blog-header/scripts/generate_header.py` at 1200×630 px PNG.
-   - Output includes `-dark.png`, `-light.png`, and a default social card `.png`.
-   - On article pages, headers are rendered via `<picture>` using **inverted contrast**:
-     - Light mode page displays the **dark** image banner.
-     - Dark mode page (`media="(prefers-color-scheme: dark)"`) displays the **light** image banner.
-   - The display size on the page is capped to `max-width: 600px; height: auto;` to preserve broadside proportions and keep the banner compact.
-   - The `<picture>` element is wrapped in `<h1 class="article-title-image">` with descriptive `alt` text to serve as the document title without duplicating text.
+1. **Editorial Illustrations & Blog Header Images**
+   - Created via `.agents/skills/generate-site-visuals/` in the **Literary Interface Curations** style (pochoir stencil and matte cut-paper collage on warm unbleached parchment `#fbf9f4` with delicate drop shadows and stippled gouache texture).
+   - **Interactive Sizing Mandate:** Agents must always prompt the user for their preferred image size/aspect ratio (suggesting `16:9` / `1200×630` for headers, `3:2` for article figures, `1:1` for cards/avatars) rather than silently defaulting.
+   - **10-Variant Batch Mandate:** Agents must never generate only a single image. Always generate a batch of **10 diverse conceptual variants** for user review and selection before committing the final asset.
+   - **Canonical Character Trio:** Illustrative scenes feature the site's recurring non-human shape characters (see ADR-007):
+     - **Bumpy (The Thinker & Observer):** Slate teal pear/gumdrop shape with surface bumps (no band-aids), round wire reading spectacles, and bare feet.
+     - **Spring (The Catalyst & Energy):** Single contiguous column of terracotta paper coils, smooth domed head with eyes and smile, no metal embellishments, and bare feet.
+     - **Stacks (The Curious Learner):** Three stacked stones (Blue top, Yellow middle, Red bottom), each with its own distinct eyes and mouth. Legs with bare feet on red bottom stone only; arms on yellow middle stone only.
+   - **Blog Header Embedding (Inverted Contrast):**
+     - On article pages, headers are rendered via `<picture>` using **inverted contrast**:
+       - Light mode page displays the **dark** image banner.
+       - Dark mode page (`media="(prefers-color-scheme: dark)"`) displays the **light** image banner.
+     - The display size on the page is capped to `max-width: 600px; height: auto;` to preserve broadside proportions and keep the banner compact.
+     - The `<picture>` element is wrapped in `<h1 class="article-title-image">` with descriptive `alt` text to serve as the document title without duplicating text.
 2. **Social Cards (Open Graph / Twitter)**
    - Every page must specify `og:image`, `og:image:width: 1200`, `og:image:height: 630`, and `twitter:card: summary_large_image`.
    - General site pages point to `/static/images/og-card.png`.
    - Blog posts point to their tailored 1200×630 header card.
 3. **Diagrams & Visual Schematics**
-   - Architecture, flow, and sequence diagrams must be created as vector SVGs adhering to the Monograph & Broadside design system using `.agents/skills/generate-broadside-diagram/scripts/generate_diagram.py`.
-   - Dual variants must be generated: `<slug>-light.svg` (warm paper `#fbf9f4`, card `#f4f1ea`, terracotta `#991b1b` accents) and `<slug>-dark.svg` (obsidian `#151413`, card `#1e1b19`, warm amber `#d99b43` accents).
+   - Architecture, flow, and pipeline diagrams are created as vector SVGs adhering to the **Modern Swiss Monograph** design system using `.agents/skills/generate-site-visuals/scripts/generate_diagram.py` (see ADR-004, ADR-007, and ADR-008).
+   - **Visual Anatomy:** High-contrast rectilinear grid (`rx="2"` or `rx="3"`), serif titles (`EB Garamond` 22–24px), sans-serif node headers with uppercase indicator pills and status beacons (`JetBrains Mono` 10–11px + `<circle r="4">`), and clean hairline connectors (`stroke-width: 1.2px` to `1.5px`).
+   - **Text-Wrapping Rule:** All multi-line prose in node cards must be authored across explicit stacked `<text>` lines with coordinated `y` coordinates to prevent bounding box overflows.
+   - Dual variants must be generated: `<slug>-light.svg` (warm paper `#fbf9f4`, card `#f4f1ea`, terracotta `#991b1b`, slate teal `#2d6a78`) and `<slug>-dark.svg` (obsidian `#151413`, card `#1e1b19`, coral red `#e05345`, bright teal `#5fa3b2`, amber `#d99b43`).
    - Embed within `<figure>` using `<picture>` for dynamic theme switching:
      ```html
      <figure>
