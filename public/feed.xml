@@ -8,6 +8,14 @@
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
 
   <item>
+    <title>Full-stack Dart with Cloud Functions for Firebase</title>
+    <link>https://www.youtube.com/watch?v=CcyX-pqjDp0</link>
+    <guid>https://www.youtube.com/watch?v=CcyX-pqjDp0</guid>
+    <pubDate>Wed, 07 Oct 2026 09:00:03 GMT</pubDate>
+    <description>Catching up with Firebase Developer Relations Engineer Arthur Thompson live at Fluttercon USA to discuss Firebase in the agentic era, full-stack Dart with Cloud Functions, and securing AI workflows with App Check.</description>
+  </item>
+
+  <item>
     <title>Why Flutter Matters in the AI Era with Eric Seidel</title>
     <link>https://www.youtube.com/watch?v=8OUcGUiKj8M</link>
     <guid>https://www.youtube.com/watch?v=8OUcGUiKj8M</guid>
