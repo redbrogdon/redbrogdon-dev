@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Redirecting... · Andrew Brogdon</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/favicon-180x180.png" type="image/png" />
+  <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
+
+  <!-- Preload local webfonts -->
+  <link rel="preload" href="/static/webfonts/eb-garamond-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/webfonts/jetbrains-mono-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/static/css/main.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7H22E9BGS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-K7H22E9BGS');
+  </script>
+
+  <style>
+    .redirect-wrapper {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .redirect-card {
+      max-width: 580px;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .redirect-card h1 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .redirect-destination {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      word-break: break-all;
+    }
+
+    .redirect-destination a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .redirect-destination a:hover {
+      color: var(--link-hover);
+    }
+
+    .redirect-note {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="redirect-wrapper">
+    <main class="redirect-card">
+      <h1 id="redirect-heading">Redirecting…</h1>
+      <p class="redirect-destination" id="redirect-msg">
+        Forwarding you to <a id="dest-link" href="#">destination</a>…
+      </p>
+      <p class="redirect-note">
+        If you are not redirected automatically in a moment, click the link above.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      /**
+       * Registry of shortlink redirects.
+       * Keys should be lowercase URL slugs without leading or trailing slashes.
+       */
+      const REDIRECTS = {
+        "graphicizer-prompt": "https://gist.github.com/redbrogdon/676f3d8cfd6aef58a1272949e8ffdbdf"
+      };
+
+      // Parse slug from pathname (e.g., "/go/graphicizer-prompt" or "/go/graphicizer-prompt/")
+      const path = window.location.pathname.replace(/\/+$/, "");
+      const segments = path.split("/").filter(Boolean);
+      const slug = (segments.length >= 2 && segments[0] === "go") ? segments[1].toLowerCase() : "";
+      const destination = REDIRECTS[slug];
+
+      // Unknown slug: redirect directly to the standard 404 page
+      if (!destination) {
+        window.location.replace("/404.html");
+        return;
+      }
+
+      // Update document title and DOM elements
+      document.title = "Redirecting to " + slug + " · Andrew Brogdon";
+      const destLink = document.getElementById("dest-link");
+      if (destLink) {
+        destLink.href = destination;
+        destLink.textContent = destination;
+      }
+
+      let redirected = false;
+      function performRedirect() {
+        if (redirected) return;
+        redirected = true;
+        window.location.replace(destination);
+      }
+
+      // Dispatch GA4 event using beacon transport for reliable transmission
+      if (typeof gtag === "function") {
+        gtag("event", "share_link_redirect", {
+          "event_category": "Shortlink",
+          "event_label": slug,
+          "destination_url": destination,
+          "transport_type": "beacon",
+          "event_callback": performRedirect
+        });
+      }
+
+      // Safety timeout in case ad-blockers or network latency delay GA callback
+      setTimeout(performRedirect, 300);
+    })();
+  </script>
+</body>
+
+</html>

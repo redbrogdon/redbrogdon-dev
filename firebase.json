@@ -6,6 +6,12 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "rewrites": [
+      {
+        "source": "/go/**",
+        "destination": "/go/index.html"
+      }
+    ],
     "headers": [
       {
         "source": "/**",

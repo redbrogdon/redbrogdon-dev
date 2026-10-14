@@ -129,7 +129,12 @@ The sidebar navigation and social links are uniform across all pages:
 3. **Article Open Graph Tags**
    - Blog posts must specify `article:published_time`, `article:modified_time`, and `article:author`.
 4. **Google Analytics (GA4)**
-   - `G-K7H22E9BGS` must be included asynchronously in `<head>` on all 11 pages (including the 404 error page).
+   - `G-K7H22E9BGS` must be included asynchronously in `<head>` on all pages (including the 404 error page and redirect dispatcher).
+5. **Shortlinks & Analytics Redirects (`/go/*`)**
+   - Inbound shortlinks (`https://redbrogdon.dev/go/<slug>`) route to `public/go/index.html` via a wildcard rewrite in `firebase.json` (`"source": "/go/**", "destination": "/go/index.html"`).
+   - To track shortlink usage in GA4 without server-side compute, the client-side dispatcher fires a `share_link_redirect` event via beacon transport and invokes `window.location.replace()` upon `event_callback` (backed by a 300ms safety timeout).
+   - Unrecognized slugs or root `/go/` requests immediately redirect to `/404.html`.
+   - Shortlinks are registered declaratively in `public/go/index.html` (see [ADR-009](decisions/009-client-side-analytics-redirect-dispatcher.md)).
 
 ---
 
