@@ -8,6 +8,14 @@
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
 
   <item>
+    <title>Instant GenUI with Asynchronous A2UI</title>
+    <link>https://www.youtube.com/watch?v=nnIOW6uOlcw</link>
+    <guid>https://www.youtube.com/watch?v=nnIOW6uOlcw</guid>
+    <pubDate>Wed, 14 Oct 2026 09:00:36 GMT</pubDate>
+    <description>Demonstrating how to eliminate startup latency in Generative UI applications by asynchronously pre-generating and caching A2UI messages with Dart Cloud Functions and Cloud Firestore.</description>
+  </item>
+
+  <item>
     <title>Why Flutter Matters in the AI Era with Eric Seidel</title>
     <link>https://www.youtube.com/watch?v=8OUcGUiKj8M</link>
     <guid>https://www.youtube.com/watch?v=8OUcGUiKj8M</guid>
