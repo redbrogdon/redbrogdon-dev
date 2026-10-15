@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Specs · Andrew Brogdon</title>
+  <meta name="description"
+    content="Software specifications, domain models, and reference blueprints designed to be consumed directly by autonomous coding agents and human builders by Andrew Brogdon.">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/favicon-180x180.png" type="image/png" />
+  <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
+  <link rel="alternate" type="application/rss+xml" title="Andrew Brogdon · Blog, Media, and Specs Feed" href="/feed.xml" />
+  <link rel="author" href="/humans.txt" />
+  <link rel="canonical" href="https://redbrogdon.dev/specs/" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Andrew Brogdon">
+  <meta property="og:url" content="https://redbrogdon.dev/specs/">
+  <meta property="og:title" content="Specs · Andrew Brogdon">
+  <meta property="og:description"
+    content="Software specifications, domain models, and reference blueprints designed to be consumed directly by autonomous coding agents and human builders by Andrew Brogdon.">
+  <meta property="og:image" content="https://redbrogdon.dev/static/images/og-card.png">
+  <meta property="og:image:secure_url" content="https://redbrogdon.dev/static/images/og-card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Specs · Andrew Brogdon">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@redbrogdon">
+  <meta name="twitter:creator" content="@redbrogdon">
+  <meta name="twitter:title" content="Specs · Andrew Brogdon">
+  <meta name="twitter:description"
+    content="Software specifications, domain models, and reference blueprints designed to be consumed directly by autonomous coding agents and human builders by Andrew Brogdon.">
+  <meta name="twitter:image" content="https://redbrogdon.dev/static/images/og-card.png">
+  <meta name="twitter:image:alt" content="Specs · Andrew Brogdon">
+
+  <!-- Preload local webfonts -->
+  <link rel="preload" href="/static/webfonts/eb-garamond-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/css/brands.css">
+
+  <!-- Game of Life Background Shader -->
+  <script defer src="/static/js/game-of-life.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7H22E9BGS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-K7H22E9BGS');
+  </script>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Specs · Andrew Brogdon",
+    "url": "https://redbrogdon.dev/specs/",
+    "description": "Software specifications, domain models, and reference blueprints designed to be consumed directly by autonomous coding agents and human builders by Andrew Brogdon.",
+    "author": {
+      "@type": "Person",
+      "name": "Andrew Brogdon",
+      "url": "https://redbrogdon.dev/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="broadside-layout">
+
+    <aside class="sidebar">
+      <a href="/" class="avatar-link">
+        <img src="/static/images/headshot.png" alt="Headshot of Andrew Brogdon"
+          title="This picture is a lie. I'm rarely outside." class="avatar" />
+      </a>
+      <h1 class="site-title"><a href="/">Andrew Brogdon</a></h1>
+
+      <div class="sidebar-links">
+        <nav class="sidebar-nav">
+          <a href="/">Home</a>
+          <a href="/blog/">Blog</a>
+          <a href="/media/">Media</a>
+          <a href="/specs/" class="active">Specs</a>
+          <a href="/poetry/">Poetry</a>
+          <a href="/feed.xml">RSS<span class="feed-label"> feed</span></a>
+        </nav>
+
+        <div class="sidebar-social">
+          <a href="https://github.com/redbrogdon" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i> <span class="social-label">GitHub</span>
+          </a>
+          <a href="https://bsky.app/profile/redbrogdon.dev" target="_blank" rel="noopener" title="Bluesky"
+            aria-label="Bluesky">
+            <i class="fa-brands fa-bluesky"></i> <span class="social-label">Bluesky</span>
+          </a>
+          <a href="https://linkedin.com/in/redbrogdon" target="_blank" rel="noopener" title="LinkedIn"
+            aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin"></i> <span class="social-label">LinkedIn</span>
+          </a>
+          <a href="https://x.com/redbrogdon" target="_blank" rel="noopener" title="X / Twitter"
+            aria-label="X / Twitter">
+            <i class="fa-brands fa-x-twitter"></i> <span class="social-label">X / Twitter</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1-BJMOylQNp1Rth1K4PTJAfbRyiPhpA9U/view" target="_blank"
+            rel="noopener" title="CV" aria-label="CV">
+            <i class="fa-solid fa-file-lines"></i> <span class="social-label">CV</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <main id="main-content" class="main-content" tabindex="-1">
+      <header style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 2.3rem; font-weight: 600; line-height: 1.2; margin-bottom: 0.5rem;">Specs</h2>
+        <p style="color: var(--muted); font-size: 1.15rem;">
+          Software specifications, domain models, and reference blueprints designed to be consumed directly by autonomous coding agents and human builders.
+        </p>
+      </header>
+
+      <ul class="editorial-list">
+        <li>
+          <div class="entry-line">
+            <a href="/specs/brog-city/" class="entry-name">Brog City</a>
+            <span class="entry-meta">October 2026</span>
+          </div>
+          <p class="entry-desc">
+            A living macOS desktop wallpaper engine that renders intimate, two-building isometric pixel-art city corners synchronized with real-time Dublin, Ohio weather, local clock time, and generative AI scene synthesis.
+          </p>
+        </li>
+      </ul>
+    </main>
+
+  </div>
+</body>
+
+</html>

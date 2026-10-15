@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Andrew Brogdon · Blog &amp; Media</title>
+  <title>Andrew Brogdon · Blog, Media, and Specs</title>
   <link>https://redbrogdon.dev</link>
-  <description>Technical essays, architecture deep dives, talks, and podcasts on generative UI, agentic workflows, and developer platforms by Andrew Brogdon.</description>
+  <description>Technical essays, architecture deep dives, software specifications, talks, and podcasts on generative UI, agentic workflows, and developer platforms by Andrew Brogdon.</description>
   <language>en-us</language>
   <atom:link href="https://redbrogdon.dev/feed.xml" rel="self" type="application/rss+xml" />
+
+  <item>
+    <title>Spec: Brog City</title>
+    <link>https://redbrogdon.dev/specs/brog-city/</link>
+    <guid>https://redbrogdon.dev/specs/brog-city/</guid>
+    <pubDate>Thu, 15 Oct 2026 15:30:00 GMT</pubDate>
+    <description>A living macOS desktop wallpaper engine that renders intimate, two-building isometric pixel-art city corners synchronized with real-time Dublin, Ohio weather, local clock time, and generative AI scene synthesis.</description>
+  </item>
 
   <item>
     <title>Instant GenUI with Asynchronous A2UI</title>

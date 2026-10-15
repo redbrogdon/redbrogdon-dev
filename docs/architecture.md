@@ -12,16 +12,16 @@ This document defines the architectural standards, design specifications, and co
    - Never link to external CDNs (e.g., cdnjs, unpkg, Google Fonts).
 
 2. **Mandatory Content Synchronization**
-    - Whenever any new content (blog post, poem, talk, podcast, or appearance) is added to the site:
+    - Whenever any new content (blog post, spec, poem, talk, podcast, or appearance) is added to the site:
       1. Create or update the content page or entry with `<link rel="canonical" href="...">`.
-      2. For blog posts, include `article:published_time`, `article:modified_time`, `article:author`, and `BlogPosting` JSON-LD schema.
-      3. Update the corresponding section index (`public/blog/index.html` or `public/media/index.html`).
-      4. Prepend a new `<item>` entry to the RSS feed (`public/feed.xml`).
+      2. For blog posts, include `article:published_time`, `article:modified_time`, `article:author`, and `BlogPosting` JSON-LD schema; for specs, include `TechArticle` JSON-LD schema.
+      3. Update the corresponding section index (`public/blog/index.html`, `public/media/index.html`, or `public/specs/index.html`).
+      4. Prepend a new `<item>` entry to the RSS feed (`public/feed.xml`). Specs prepend `Spec: ` to the title.
       5. Add or update the canonical `<url>` entry in the sitemap (`public/sitemap.xml`) including `<lastmod>`.
     - **Chronological Rule**: Both section indexes and the RSS feed must strictly maintain **descending chronological order** (newest content first).
 
 3. **Layout Stability (Zero Jitter)**
-   - Centered layouts (`margin: 0 auto`) shift horizontally when navigating between short pages without scrollbars (e.g., Home, Poetry) and long pages with scrollbars (e.g., Blog, Media).
+   - Centered layouts (`margin: 0 auto`) shift horizontally when navigating between short pages without scrollbars (e.g., Home, Poetry, Specs) and long pages with scrollbars (e.g., Blog, Media).
    - `scrollbar-gutter: stable;` must be maintained on `html` in `public/static/css/main.css` to guarantee identical viewport metrics across every page.
 
 ---
@@ -55,7 +55,7 @@ Colors dynamically adjust via standard CSS custom properties and `@media (prefer
 
 ### Navigation & Identity Links
 The sidebar navigation and social links are uniform across all pages:
-- **Navigation**: `Home` (`/`), `Blog` (`/blog/`), `Media` (`/media/`), `Poetry` (`/poetry/`), and `RSS` (`/feed.xml`). Active links carry `.active` with the `›` indicator.
+- **Navigation**: `Home` (`/`), `Blog` (`/blog/`), `Media` (`/media/`), `Specs` (`/specs/`), `Poetry` (`/poetry/`), and `RSS` (`/feed.xml`). Active links carry `.active` with the `›` indicator.
 - **Social Links**: GitHub, Bluesky, LinkedIn, X / Twitter.
 - **CV Link**: Must use the document icon `<i class="fa-solid fa-file-lines"></i>` with label `"CV"`, linking to the official Google Drive document. Never use generic PDF paths or Google Drive brand icons.
 
@@ -116,15 +116,40 @@ The sidebar navigation and social links are uniform across all pages:
 
 ---
 
-## 5. SEO, Structured Data & Analytics
+## 5. Software Specifications & Agent Distribution
+
+Specifications are standardized software blueprints designed to be consumed directly by autonomous coding agents (Google Antigravity, Cursor, Claude Code, Gemini CLI) and human builders (see [ADR-010](decisions/010-specifications-content-category-and-distribution.md)).
+
+1. **Directory & File Hierarchy**
+   - Each spec lives in `public/specs/<slug>/`.
+   - **`spec.md` (Mandatory Root):** The primary machine-readable specification document.
+   - **Sub-resources & Relative Linking:** Auxiliary domain files (`domain/schema.md`, `domain/architecture.md`) and media references (`assets/mockup.png`) must be linked from `spec.md` using relative paths so an agent can traverse the full document graph starting at `spec.md`.
+2. **Serving & CORS Rules**
+   - Configured in `firebase.json` under `**/*.md`:
+     - `Content-Type: text/markdown; charset=utf-8`
+     - `Access-Control-Allow-Origin: *`
+     - Allows direct `curl` and client-side agent fetch operations without CORS failures.
+3. **Human-Readable Presentation Page (`index.html`)**
+   - Built with the Broadside layout and EB Garamond prose.
+   - **Hero Media:** Screenshot or demo video of Andrew's reference implementation inside `<figure class="spec-hero-media">` with `<figcaption>`.
+   - **Agent Prompt Box:** Styled callout (`.agent-prompt-box`) with copy-ready prompt instructions pointing an agent to `https://redbrogdon.dev/specs/<slug>/spec.md`.
+   - **Executive Overview & Problem Statement:** Contextual background and design goals.
+4. **Syndication & Feed Formatting**
+   - RSS channel title: `Andrew Brogdon · Blog, Media, and Specs`.
+   - Spec feed items strictly prefix the title with `Spec: ` (e.g. `<title>Spec: [Project Name]</title>`) and link to the human-readable landing page (`https://redbrogdon.dev/specs/<slug>/`).
+
+---
+
+## 6. SEO, Structured Data & Analytics
 
 1. **Canonical URLs**
    - Every valid page must declare `<link rel="canonical" href="https://redbrogdon.dev/...">` in `<head>`.
    - The 404 page omits a canonical link and includes `<meta name="robots" content="noindex, nofollow">`.
 2. **Schema.org Structured Data (JSON-LD)**
    - Homepage (`/`): `WebSite` and `Person` schema with `sameAs` entity links.
-   - Section Indexes (`/blog/`, `/media/`, `/poetry/`): `CollectionPage` schema with author attribution.
+   - Section Indexes (`/blog/`, `/media/`, `/specs/`, `/poetry/`): `CollectionPage` schema with author attribution.
    - Blog Posts (`/blog/*.html`): `BlogPosting` schema with headline, dates, author, and featured image.
+   - Specifications (`/specs/<slug>/index.html`): `TechArticle` schema with name, description, author, and datePublished.
    - Poems (`/poetry/*.html`): `CreativeWork` schema with title, author, and description.
 3. **Article Open Graph Tags**
    - Blog posts must specify `article:published_time`, `article:modified_time`, and `article:author`.
@@ -138,7 +163,7 @@ The sidebar navigation and social links are uniform across all pages:
 
 ---
 
-## 6. Background Automation (Sidecars)
+## 7. Background Automation (Sidecars)
 
 Background automation runs via Google Antigravity managed sidecars:
 - Located under `.agents/sidecars/` (e.g. `blog-watcher`).

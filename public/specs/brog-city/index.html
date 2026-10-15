@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Brog City (Spec) · Andrew Brogdon</title>
+  <meta name="description"
+    content="A living macOS desktop wallpaper engine that renders intimate, two-building isometric pixel-art city corners synchronized with real-time Dublin, Ohio weather, local clock time, and generative AI scene synthesis.">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/favicon-180x180.png" type="image/png" />
+  <link rel="icon" sizes="32x32" href="/static/icon/favicon-32x32.png" type="image/png" />
+  <link rel="alternate" type="application/rss+xml" title="Andrew Brogdon · Blog, Media, and Specs Feed" href="/feed.xml" />
+  <link rel="author" href="/humans.txt" />
+  <link rel="canonical" href="https://redbrogdon.dev/specs/brog-city/" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Andrew Brogdon">
+  <meta property="og:url" content="https://redbrogdon.dev/specs/brog-city/">
+  <meta property="og:title" content="Brog City (Spec) · Andrew Brogdon">
+  <meta property="og:description"
+    content="A living macOS desktop wallpaper engine that renders intimate, two-building isometric pixel-art city corners synchronized with real-time Dublin, Ohio weather, local clock time, and generative AI scene synthesis.">
+  <meta property="og:image" content="https://redbrogdon.dev/specs/brog-city/assets/screenshot.png">
+  <meta property="og:image:secure_url" content="https://redbrogdon.dev/specs/brog-city/assets/screenshot.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1376">
+  <meta property="og:image:height" content="768">
+  <meta property="og:image:alt" content="Brog City isometric pixel-art wallpaper engine diorama">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@redbrogdon">
+  <meta name="twitter:creator" content="@redbrogdon">
+  <meta name="twitter:title" content="Brog City (Spec) · Andrew Brogdon">
+  <meta name="twitter:description"
+    content="A living macOS desktop wallpaper engine that renders intimate, two-building isometric pixel-art city corners synchronized with real-time Dublin, Ohio weather, local clock time, and generative AI scene synthesis.">
+  <meta name="twitter:image" content="https://redbrogdon.dev/specs/brog-city/assets/screenshot.png">
+  <meta name="twitter:image:alt" content="Brog City isometric pixel-art wallpaper engine diorama">
+
+  <!-- Preload local webfonts -->
+  <link rel="preload" href="/static/webfonts/eb-garamond-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/css/brands.css">
+
+  <!-- Game of Life Background Shader -->
+  <script defer src="/static/js/game-of-life.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7H22E9BGS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-K7H22E9BGS');
+  </script>
+
+  <!-- Structured Data: TechArticle -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Brog City Specification",
+    "description": "A living macOS desktop wallpaper engine that renders intimate, two-building isometric pixel-art city corners synchronized with real-time Dublin, Ohio weather, local clock time, and generative AI scene synthesis.",
+    "url": "https://redbrogdon.dev/specs/brog-city/",
+    "mainEntityOfPage": "https://redbrogdon.dev/specs/brog-city/spec.md",
+    "datePublished": "2026-10-15",
+    "author": {
+      "@type": "Person",
+      "name": "Andrew Brogdon",
+      "url": "https://redbrogdon.dev/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Andrew Brogdon",
+      "url": "https://redbrogdon.dev/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="broadside-layout">
+
+    <aside class="sidebar">
+      <a href="/" class="avatar-link">
+        <img src="/static/images/headshot.png" alt="Headshot of Andrew Brogdon"
+          title="This picture is a lie. I'm rarely outside." class="avatar" />
+      </a>
+      <h1 class="site-title"><a href="/">Andrew Brogdon</a></h1>
+
+      <div class="sidebar-links">
+        <nav class="sidebar-nav">
+          <a href="/">Home</a>
+          <a href="/blog/">Blog</a>
+          <a href="/media/">Media</a>
+          <a href="/specs/" class="active">Specs</a>
+          <a href="/poetry/">Poetry</a>
+          <a href="/feed.xml">RSS<span class="feed-label"> feed</span></a>
+        </nav>
+
+        <div class="sidebar-social">
+          <a href="https://github.com/redbrogdon" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i> <span class="social-label">GitHub</span>
+          </a>
+          <a href="https://bsky.app/profile/redbrogdon.dev" target="_blank" rel="noopener" title="Bluesky"
+            aria-label="Bluesky">
+            <i class="fa-brands fa-bluesky"></i> <span class="social-label">Bluesky</span>
+          </a>
+          <a href="https://linkedin.com/in/redbrogdon" target="_blank" rel="noopener" title="LinkedIn"
+            aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin"></i> <span class="social-label">LinkedIn</span>
+          </a>
+          <a href="https://x.com/redbrogdon" target="_blank" rel="noopener" title="X / Twitter"
+            aria-label="X / Twitter">
+            <i class="fa-brands fa-x-twitter"></i> <span class="social-label">X / Twitter</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1-BJMOylQNp1Rth1K4PTJAfbRyiPhpA9U/view" target="_blank"
+            rel="noopener" title="CV" aria-label="CV">
+            <i class="fa-solid fa-file-lines"></i> <span class="social-label">CV</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <main id="main-content" class="main-content" tabindex="-1">
+      <article class="article-body">
+        <header style="margin-bottom: 2rem;">
+          <h1 class="article-title">Brog City</h1>
+          <div class="article-meta">
+            <span>October 2026</span>
+            <span>·</span>
+            <span>Flutter macOS · Swift AppKit · Gemini API · Open-Meteo</span>
+          </div>
+          <div style="margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.85rem;">
+            <a href="spec.md" target="_blank"><i class="fa-solid fa-file-code"></i> Raw <code>spec.md</code></a>
+          </div>
+        </header>
+
+        <h2>A living, weather-synchronized pixel-art wallpaper engine for macOS.</h2>
+
+        <figure class="spec-hero-media">
+          <img src="assets/screenshot.png" alt="Brog City intimate 2.5D isometric pixel-art diorama showing the Twilight Tram Stop and Corner Bistro scene" width="1376" height="768">
+          <figcaption>
+            Archetype Scene #4 (<em>Twilight Tram Stop &amp; Corner Bistro</em>) rendered on the <code>1376 &times; 768</code> logical pixel canvas (<code>2752 &times; 1536</code> retina export), where the compositor overlays working analog clock hands on the tram shelter clock face, pulsing lantern halos, and rising bistro cup steam.
+          </figcaption>
+        </figure>
+
+        <div class="agent-prompt-box">
+          <div class="agent-prompt-header">
+            <span class="agent-prompt-title"><i class="fa-solid fa-robot"></i> Prompt Your Coding Agent</span>
+            <button class="prompt-copy-btn" id="copy-prompt-btn" type="button" title="Copy to clipboard" aria-label="Copy to clipboard">
+              <i class="fa-solid fa-copy"></i>
+            </button>
+          </div>
+          <p>Hand this prompt directly to your autonomous coding agent to build an implementation of this project:</p>
+          <pre><code id="agent-prompt-text">Build this application according to the specification at https://redbrogdon.dev/specs/brog-city/spec.md</code></pre>
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+          Most dynamic desktop wallpapers fall into one of two extremes: static photographs that slowly cross-fade between four time-of-day stills, or high-framerate video loops that continuously tax the GPU even when buried beneath a dozen application windows. <strong>Brog City</strong> was created to explore a calmer, more intentional middle ground—an ambient macOS wallpaper engine that treats the desktop background as a living, street-level 32-bit pixel-art diorama updated on a measured, minute-by-minute cadence.
+        </p>
+        <p>
+          Instead of distant, anonymous city skylines, Brog City frames tightly zoomed-in waterfront corners featuring only two adjacent buildings—a corner French bistro beside a vintage canal-side tram stop, an ivy-draped brick clocktower florist linked by a footbridge to a wooden tea house, a basement jazz cafe tucked next to a railway viaduct bookbinder, a sunlit timber boathouse beneath a rooftop pergola, and a winter canal apothecary across from a stone hearth bakery. Each vignette is grounded in real-world telemetry: the engine polls live meteorological conditions in Dublin, Ohio via the Open-Meteo API and reads the Mac's system clock to drive subtle ambient color grading and real-time procedural pixel animations. When paired with a Google Gemini API key, Brog City synthesizes a brand-new 16:9 isometric pixel-art illustration on each update cycle, while a native Swift AppKit controller manages a lightweight Menu Bar interface and samples Quartz window bounds every three seconds to automatically pause rendering whenever all monitors are covered.
+        </p>
+      </article>
+    </main>
+
+  </div>
+
+  <script>
+    (function () {
+      const copyBtn = document.getElementById('copy-prompt-btn');
+      const promptText = document.getElementById('agent-prompt-text');
+      if (copyBtn && promptText) {
+        copyBtn.addEventListener('click', function () {
+          navigator.clipboard.writeText(promptText.innerText.trim()).then(function () {
+            copyBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+            copyBtn.setAttribute('title', 'Copied!');
+            setTimeout(function () {
+              copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+              copyBtn.setAttribute('title', 'Copy to clipboard');
+            }, 2000);
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
